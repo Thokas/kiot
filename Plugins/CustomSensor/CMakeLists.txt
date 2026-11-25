@@ -42,7 +42,7 @@ target_link_libraries(CustomSensor PRIVATE
 
 )
 
-# Plasser den ferdige .so-filen direkte i plugins-katalogen der Core forventer å finne den
+# Put the finished .so file directly into the plugins directory, where Core expects to find it
 set_target_properties(CustomSensor PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/plugins"
 )

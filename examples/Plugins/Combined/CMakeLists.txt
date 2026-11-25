@@ -57,7 +57,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
 
 # Finds our Shared lib on disk
 find_package(KIOTShared REQUIRED)
-message(STATUS "FINNER KIOTShared HER: ${KIOTShared_DIR}")
+message(STATUS "FOUND KIOTShared HERE: ${KIOTShared_DIR}")
 # Build target link libraries dynamically based on what was found
 set(PLUGIN_LINK_LIBS 
     KIOTShared::KIOTShared

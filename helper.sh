@@ -5,7 +5,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPTS_PATH="$SCRIPT_DIR/scripts"
 
-# Defensive sjekk: Finnes scripts-mappen i det hele tatt?
+# Defensive check: does the scripts folder exist at all?
 if [ ! -d "$SCRIPTS_PATH" ]; then
     echo "Error: Directory '$SCRIPTS_PATH' not found."
     echo "Make sure you are running helper.sh from the root of the KIOT repository."
@@ -17,7 +17,7 @@ pause() {
     read -rp "Press Enter to return to menu..."
 }
 
-# Hjelpefunksjon som sjekker om skriptet eksisterer før kjøring
+# Helper function that checks whether the script exists before running it
 run_script() {
     local script_name="$1"
     local full_path="$SCRIPTS_PATH/$script_name"

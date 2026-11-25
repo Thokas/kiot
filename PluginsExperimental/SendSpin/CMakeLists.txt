@@ -21,7 +21,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(sendspin)
 
 set(CMAKE_AUTOMOC ON)
-# Versjonskrav
+# Version requirements
 set(KF6_MIN_VERSION "6.15")
 set(QT_MIN_VERSION "6.6.0")
 
@@ -48,7 +48,7 @@ endif()
 
 # ==============================================================================
 # 2. Target Definition & Sources
-# (Husk å endre til dine faktiske filnavn hvis du ikke bruker template.cpp lenger)
+# (Remember to change these to your actual file names if you no longer use template.cpp)
 # ==============================================================================
 add_library(${PROJECT_NAME} MODULE
     sendspinplugin.cpp

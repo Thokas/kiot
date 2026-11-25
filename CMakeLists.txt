@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.31)
 project(kiot VERSION 0.0.1 DESCRIPTION "KDE Internet of Things desktop integration for Home Automation" HOMEPAGE_URL "https://github.com/davidedmundson/kiot" LANGUAGES CXX )
 
 # ------------------------------------------------------------------------------
-# PROSJEKT DEVELOPERS Shown under device info in HA with version and more
+# PROJECT DEVELOPERS Shown under device info in HA with version and more
 # ------------------------------------------------------------------------------
 set(PROJECT_DEVELOPERS "David Edmundson & Odd Østlie" CACHE STRING "List of developers, add yourself here to be shown with the device info")
 
@@ -107,7 +107,7 @@ include(ECMConfiguredInstall)
 
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
-#Originale gives error with Experimental because sendspin-cpp uses its own rules here
+#Original gives error with Experimental because sendspin-cpp uses its own rules here
 #file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.hpp *.c)
 #Changed to specific folders to avoid formatting the PluginsExperimental folder as its a mess
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES

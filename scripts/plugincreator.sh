@@ -21,11 +21,11 @@ get_plugin_variables()
     read -p "Short plugin description: " NEW_PLUGIN_DESCRIPTION
     read -p "Plugin Repository url: " NEW_PLUGIN_REPOSITORY
 
-    # Fjern mellomrom og spesialtegn for klasse- og filnavn (PascalCase / ren streng)
-    # F.eks. "Min Kul Plugin" blir "MinKulPlugin"
+    # Remove spaces and special characters for class and file names (PascalCase / plain string)
+    # E.g. "My Cool Plugin" becomes "MyCoolPlugin"
     NEW_PLUGIN_CLASS=$(echo "$RAW_PLUGIN_NAME" | tr -d '[:space:]-_')
     
-    # Hvis du ønsker en merhet-vennlig mappe (f.eks. små bokstaver, fjernet mellomrom):
+    # If you want a friendlier folder (e.g. lowercase letters, spaces removed):
     NEW_PLUGIN_NAME=$(echo "$RAW_PLUGIN_NAME" | tr '[:upper:]' '[:lower:]' | tr '[:space:]' '_')
 
     echo "Using plugin class name: $NEW_PLUGIN_CLASS"
@@ -80,7 +80,7 @@ replace_variables()
         echo "File org.davidedmundson.kiot.Plugin.TemplatePlugin.Metainfo.xml does not exist."
     fi
 
-    # Oppdater referanser i filer
+    # Update references in the files
     sed -i "s/template.h/$NEW_PLUGIN_CLASS.h/g" CMakeLists.txt
     sed -i "s/template.cpp/$NEW_PLUGIN_CLASS.cpp/g" CMakeLists.txt
     sed -i "s/template.h/$NEW_PLUGIN_CLASS.h/g" "$NEW_PLUGIN_CLASS.cpp"

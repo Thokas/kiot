@@ -112,7 +112,7 @@ set_target_properties(${LIB_TARGET} PROPERTIES
 
 # Create a modern namespaced alias for internal and external consumption
 add_library(KIOTShared::KIOTShared ALIAS ${LIB_TARGET})
-# Installasjonen blir kjempeenkel fordi FILE_SET tar seg av alt!
+# Installation becomes dead simple because FILE_SET takes care of everything!
 install(TARGETS ${LIB_TARGET}
     EXPORT "${LIB_TARGET}Targets"
     RUNTIME DESTINATION ${KDE_INSTALL_BINDIR}
