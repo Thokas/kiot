@@ -76,7 +76,7 @@ QQC2.Page  {
                         if (item) {
                             item.settingsManager = cppData
                         if (item.hasOwnProperty("section")) {
-                            item.section = section // Setter riktig seksjonsnavn her!
+                            item.section = section // Sets the right section name here!
                         }
                     }
                 }

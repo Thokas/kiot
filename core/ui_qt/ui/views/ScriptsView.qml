@@ -12,7 +12,7 @@ Flickable {
     property var settingsManager: null
     property string section: "Scripts"
 
-    // --- INTERN DIALOG: NYTT SKRIPT ---
+    // --- INTERNAL DIALOG: NEW SCRIPT ---
     QQC2.Dialog {
         id: newScriptDialog
         title: "Create New Script"
@@ -83,7 +83,7 @@ Flickable {
         }
     }
     
-    // --- INTERN DIALOG: SLETT SKRIPT ---
+    // --- INTERNAL DIALOG: DELETE SCRIPT ---
     QQC2.Dialog {
         id: deleteScriptDialog
         title: "Delete Script"
@@ -120,7 +120,7 @@ Flickable {
         }
     }
 
-    // --- HOVEDINNHOLD ---
+    // --- MAIN CONTENT ---
     ColumnLayout {
         id: contentColumn
         width: parent.width

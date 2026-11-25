@@ -73,12 +73,12 @@ MainWindow::~MainWindow()
 WId MainWindow::getWindowId()
 {
 
-    QWindow *window = this->windowHandle(); // hent QWindow fra QMainWindow
+    QWindow *window = this->windowHandle(); // get the QWindow from the QMainWindow
     if (!window) {
-        this->createWinId(); // sørg for at vinduet får en native handle
+        this->createWinId(); // make sure the window gets a native handle
         window = this->windowHandle();
         if (!window) {
-            return 0; // fortsatt ikke klar
+            return 0; // still not ready
         }
     }
 

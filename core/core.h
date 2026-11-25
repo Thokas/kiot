@@ -11,7 +11,7 @@
 #include <QVariantMap>
 #include <QPluginLoader>
 
-// Trekk inn PlatformHelper i globalt scope (eller bruk KIOTShared::PlatformHelper i koden)
+// Pull PlatformHelper into the global scope (or use KIOTShared::PlatformHelper in the code)
 using KIOTShared::PlatformHelper;
 using KIOTShared::Plugins::KIOTPluginInterface;
 

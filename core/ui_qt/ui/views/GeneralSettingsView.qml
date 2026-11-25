@@ -5,12 +5,12 @@ import QtQuick.Layouts
 ColumnLayout {
     id: root
     anchors.fill: parent
-    anchors.margins: 16 // Gir en fin, luftig ramme rundt hele panelet
+    anchors.margins: 16 // Gives a nice, airy frame around the whole panel
     spacing: 12
 
     property var settingsManager: null
 
-    // ---- Top branding header (Mer elegant og luftig) ----
+    // ---- Top branding header (more elegant and airy) ----
     ColumnLayout {
         Layout.fillWidth: true
         spacing: 4
@@ -25,11 +25,11 @@ ColumnLayout {
             text: "MQTT Connection"
             font.bold: true
             font.pixelSize: 14
-            opacity: 0.7 // Gir en fin dempet effekt på undertittelen
+            opacity: 0.7 // Gives the subtitle a nice muted look
         }
     }
 
-    // Liten avstand før skjemaet starter
+    // Small gap before the form starts
     Item { Layout.preferredHeight: 4 }
 
     GridLayout {
