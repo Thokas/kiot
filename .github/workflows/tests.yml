@@ -1,9 +1,9 @@
 # Builds kiot with every plugin, the System Settings module and the tests, and runs the tests (autotests/,
 # ctest) on every push and pull request: PlatformHelper, ConfigManager, PasswordStore without a wallet,
 # Entity's ids and attribute conversion, every entity type against a real mosquitto broker (discovery,
-# state, commands, re-registration, reconnect, broker restart) and the GameLauncher's VDF parser. Tests
-# that pin a known bug are QEXPECT_FAIL: they pass while the bug is there and fail once it is fixed, so
-# the fix removes the QEXPECT_FAIL with it. KIOT_MQTT_TESTS=required makes a missing broker an error
+# state, commands, re-registration, reconnect, broker restart), the GameLauncher's VDF parser and the
+# German translations. Tests that pin a known bug are QEXPECT_FAIL: they pass while the bug is there and
+# fail once it is fixed, so the fix removes the QEXPECT_FAIL with it. KIOT_MQTT_TESTS=required makes a missing broker an error
 # rather than a skip, KIOT_TRANSLATION_TESTS=required the same for a missing locale (autotests/translations).
 #
 # The same file runs on GitHub and on a Forgejo runner with the label ubuntu-latest: the job runs in its own
