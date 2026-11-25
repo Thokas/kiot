@@ -42,7 +42,7 @@ using KIOTShared::PlatformHelper;
 #include "mprisplayer.h"
 #include "mprisroot.h"
 
-// Logger definisjon (forutsetter at denne er tilgjengelig i modulen)
+// Logger definition (assumes it is available in the module)
 Q_DECLARE_LOGGING_CATEGORY(mpris)
 
 PlayerContainer::PlayerContainer(const QString &bus, QObject *parent)

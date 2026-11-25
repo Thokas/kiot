@@ -25,7 +25,7 @@ QVariantMap VdfParser::parseString(const QString &content)
 QString VdfParser::cleanToken(const QString &token)
 {
     QString trimmed = token.trimmed();
-    // Fjern hermetegn rundt strenger om de finnes
+    // Remove the quotes around strings if there are any
     if (trimmed.startsWith('"') && trimmed.endsWith('"') && trimmed.length() >= 2) {
         trimmed = trimmed.mid(1, trimmed.length() - 2);
     }
@@ -37,23 +37,23 @@ QVariantMap VdfParser::parseBlock(QTextStream &stream)
     QVariantMap result;
     QString keyToken = "";
 
-    // Regex for å hente ut enten "siterte strenger" eller vanlige ord
+    // Regex to extract either "quoted strings" or plain words
     static const QRegularExpression tokenRegex(R"("(?:[^"\\]|\\.)*"|\S+)");
 
     while (!stream.atEnd()) {
         QString line = stream.readLine().trimmed();
 
-        // Hopp over tomme linjer og C++ style kommentarer
+        // Skip empty lines and C++ style comments
         if (line.isEmpty() || line.startsWith("//")) {
             continue;
         }
 
-        // Hvis vi treffer en lukke-brakett, er denne seksjonen/blokken ferdig
+        // If we hit a closing brace, this section/block is done
         if (line == "}") {
             break;
         }
 
-        // Hent alle tokens på linjen (f.eks: `"appid"` og `"1623730"`)
+        // Get all tokens on the line (e.g. `"appid"` and `"1623730"`)
         QRegularExpressionMatchIterator it = tokenRegex.globalMatch(line);
         QStringList tokens;
         while (it.hasNext()) {
@@ -64,25 +64,25 @@ QVariantMap VdfParser::parseBlock(QTextStream &stream)
             continue;
         }
 
-        // Tilfelle 1: Starten på en ny underblokk (f.eks "AppState" { eller InstalledDepots {)
+        // Case 1: The start of a new sub-block (e.g. "AppState" { or InstalledDepots {)
         if (tokens.size() == 1) {
             if (tokens[0] == "{") {
-                // Vi har allerede nøkkelen (f.eks "appstate"), parse underseksjonen rekursivt!
+                // We already have the key (e.g. "appstate"), parse the subsection recursively!
                 if (!keyToken.isEmpty()) {
                     result[keyToken.toLower()] = parseBlock(stream);
                     keyToken.clear();
                 }
             } else {
-                // Dette er nøkkelen til en innkommende blokk eller verdi
+                // This is the key of an upcoming block or value
                 keyToken = tokens[0];
             }
         }
-        // Tilfelle 2: Nøkkel og Verdi på samme linje (f.eks: "appid" "1623730")
+        // Case 2: Key and value on the same line (e.g. "appid" "1623730")
         else if (tokens.size() >= 2) {
-            QString key = tokens[0].toLower();   // Gjør nøkkelen case-insensitive
+            QString key = tokens[0].toLower();   // Make the key case-insensitive
             QString value = tokens[1];
 
-            // Sjekk om neste token på samme linje var en '{' (f.eks "InstalledDepots" {)
+            // Check whether the next token on the same line was a '{' (e.g. "InstalledDepots" {)
             if (value == "{") {
                 result[key] = parseBlock(stream);
             } else {

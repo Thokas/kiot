@@ -20,7 +20,7 @@ using KIOTShared::Entities::Switch;
 using KIOTShared::Entities::Select;
 using KIOTShared::Entities::Number;
 using KIOTShared::PlatformHelper;
-// Ekstern logger definert i plugin-wrapperen eller her
+// External logger, defined in the plugin wrapper or here
 Q_DECLARE_LOGGING_CATEGORY(disp_logger)
 
 ScreenController::ScreenController(QObject *parent)

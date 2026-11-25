@@ -37,9 +37,9 @@ bool LockedStatePlugin::checkCompatibility()
     if (PlatformHelper::isFlatpak()) {
         auto appId = PlatformHelper::generateServiceName();
         
-        // Sjekk tilgang til ScreenSaver på sesjonsbussen
+        // Check access to ScreenSaver on the session bus
         bool hasScreenSaverTalk = PlatformHelper::checkFlatpakFeature("Session Bus Policy", "org.freedesktop.ScreenSaver", "talk");
-        // Sjekk tilgang til login1 på systembussen
+        // Check access to login1 on the system bus
         bool hasLogin1Talk = PlatformHelper::checkFlatpakFeature("System Bus Policy", "org.freedesktop.login1", "talk");
 
         if (!hasScreenSaverTalk || !hasLogin1Talk) {

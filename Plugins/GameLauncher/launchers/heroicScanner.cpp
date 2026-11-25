@@ -93,7 +93,7 @@ QMap<QString, GameData>  HeroicScanner::scanGames()
     } else if (QDir(flatpakPath).exists()) {
         heroic_data_path = "/.var/app/com.heroicgameslauncher.hheroiclogger/config/heroic/";
     } else {
-        // ingen Heroic installasjon funnet, returner tidlig
+        // no Heroic installation found, return early
         return QMap<QString, GameData>();
     }
     m_configPath = QDir::homePath() + heroic_data_path;
@@ -133,7 +133,7 @@ QMap<QString, GameData> HeroicScanner::getHeroicGames()
     } else if (QDir(flatpakPath).exists()) {
         heroic_data_path = "/.var/app/com.heroicgameslauncher.hheroiclogger/config/heroic/";
     } else {
-        // ingen Heroic installasjon funnet, returner tidlig
+        // no Heroic installation found, return early
         return QMap<QString, GameData>();
     }
     // Epic Games Store (Legendary)

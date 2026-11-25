@@ -82,7 +82,7 @@ QMap<QString, GameData> FaugusScanner::scanGames()
     QString faugusGamesFile = QDir::homePath() + "/.local/share/faugus-launcher/games.json";
     if(!QFile(faugusGamesFile).exists())
     {
-        qCDebug(fauguslogger) << launcherName() << "Fant ikke fil:" << faugusGamesFile << "looking in flatpak paths";
+        qCDebug(fauguslogger) << launcherName() << "Could not find file:" << faugusGamesFile << "looking in flatpak paths";
         faugusGamesFile = QDir::homePath() + "/.var/app/io.github.Faugus.faugus-launcher/data/faugus-launcher/games.json";
         if(!QFile(faugusGamesFile).exists())
         {
@@ -93,7 +93,7 @@ QMap<QString, GameData> FaugusScanner::scanGames()
     QFile file(faugusGamesFile);
     
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qCDebug(fauguslogger) << launcherName() << "Kunne ikke åpne fil:" << faugusGamesFile;
+        qCDebug(fauguslogger) << launcherName() << "Could not open file:" << faugusGamesFile;
         return m_games;
     }
 
@@ -107,7 +107,7 @@ QMap<QString, GameData> FaugusScanner::scanGames()
     }
 
     if (!doc.isArray()) {
-        qCWarning(fauguslogger) << launcherName() << "Forventet en JSON Array i rot, men fikk noe annet.";
+        qCWarning(fauguslogger) << launcherName() << "Expected a JSON array at the root, but got something else.";
         return m_games;
     }
 
