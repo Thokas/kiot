@@ -27,7 +27,7 @@ void Select::setOptions(const QStringList &opts)
 {
     m_options = opts;
 
-    // Hvis HA er registrert, må config oppdateres
+    // If HA is registered, the config must be updated
     setDiscoveryConfig("state_topic", baseTopic());
     setDiscoveryConfig("command_topic", baseTopic() + "/set");
     setDiscoveryConfig("options", QJsonArray::fromStringList(m_options));
@@ -51,18 +51,18 @@ QStringList Select::options() const
 }
 void Select::init()
 {
-    // Startkonfig for HA
+    // Initial config for HA
     setDiscoveryConfig("state_topic", baseTopic());
     setDiscoveryConfig("command_topic", baseTopic() + "/set");
     setDiscoveryConfig("options", QJsonArray::fromStringList(m_options));
 
-    // Fortell HA at entiteten finnes
+    // Tell HA that the entity exists
     sendRegistration();
 
-    // Publiser initial state hvis satt
+    // Publish the initial state if set
     publishState();
 
-    // Unsubscribe først for å unngå delte subscriptions
+    // Unsubscribe first to avoid shared subscriptions
 
     // Opprett lokal subscription
     auto subscription = TransportManager::mqttClient() ->subscribe(baseTopic() + "/set");

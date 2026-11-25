@@ -60,7 +60,7 @@ void Image::init()
         setDiscoveryConfig("image_encoding", "b64");
         setDiscoveryConfig("content_type", m_mimeType);
     }
-    // Støtte for eventuell url_topic om enheten heller vil publisere URL-er
+    // Support for an optional url_topic if the device would rather publish URLs
 
     sendRegistration();
 }
@@ -74,10 +74,10 @@ void Image::publishImage(const QByteArray &imageDataBase64)
         qCWarning(imgentity) << "Image entity is in URL mode, cannot publish image data";
         return;
     }
-    // Publiserer selve bildeinnholdet til image_topic
+    // Publishes the image content itself to image_topic
     TransportManager::mqttClient() ->publish(baseTopic() + "/image", imageDataBase64, 0, true);
 
-    // Oppdater standard attributter via Entity-baseklassen
+    // Update the standard attributes via the Entity base class
     QVariantMap attrs;
     attrs["timestamp"] = QDateTime::currentDateTimeUtc().toString(Qt::ISODate);
     attrs["size_bytes"] = imageDataBase64.size();

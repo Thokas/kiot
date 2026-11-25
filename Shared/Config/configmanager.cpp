@@ -17,28 +17,28 @@ static ConfigManager* s_coreInstance = nullptr;
 ConfigManager::~ConfigManager()
 {
     if (this == s_coreInstance) {
-        qCInfo(lcConfig) << "Core ConfigManager destruert. Core-låsen er nå frigjort.";
+        qCInfo(lcConfig) << "Core ConfigManager destroyed. The Core lock is now released.";
         s_coreInstance = nullptr;
         s_coreInstantiated = false;
     }
 }
 
-// 1. Core uten defaults
+// 1. Core without defaults
 ConfigManager::ConfigManager(QObject *parent)
     : ConfigManager(ConfigType::Core, QString(), QJsonObject(), parent)
 {}
 
-// 2. Core MED defaults (Brukt i main.cpp)
+// 2. Core WITH defaults (used in main.cpp)
 ConfigManager::ConfigManager(const QJsonObject &defaultConfig, QObject *parent)
     : ConfigManager(ConfigType::Core, QString(), defaultConfig, parent)
 {}
 
-// 3. Plugin uten defaults (MÅ bruke denne)
+// 3. Plugin without defaults (MUST use this one)
 ConfigManager::ConfigManager(const QString &moduleName, QObject *parent)
     : ConfigManager(ConfigType::Plugin, moduleName, QJsonObject(), parent)
 {}
 
-// 4. Plugin MED defaults (MÅ bruke denne)
+// 4. Plugin WITH defaults (MUST use this one)
 ConfigManager::ConfigManager(const QString &moduleName, const QJsonObject &defaultConfig, QObject *parent)
     : ConfigManager(ConfigType::Plugin, moduleName, defaultConfig, parent)
 {}
@@ -50,7 +50,7 @@ ConfigManager::ConfigManager(ConfigType type, const QString &moduleName, const Q
 {
     if (m_type == ConfigType::Core) {
         if (s_coreInstance != nullptr) {
-            qCCritical(lcConfig) << "SIKKERHETSAVBRUDD: Forsøk på å opprette en sekundær Core ConfigManager ble blokkert!";
+            qCCritical(lcConfig) << "SECURITY ABORT: An attempt to create a second Core ConfigManager was blocked!";
             m_type = ConfigType::Plugin;
             m_moduleName = "unauthorized_core_attempt";
         } else {
@@ -60,7 +60,7 @@ ConfigManager::ConfigManager(ConfigType type, const QString &moduleName, const Q
         }
     } else {
         if (moduleName.trimmed().compare("Core", Qt::CaseInsensitive) == 0) {
-            qCCritical(lcConfig) << "SIKKERHETSADVARSEL: Plugin prøvde å kalle seg 'Core'. Omdøpes automatisk.";
+            qCCritical(lcConfig) << "SECURITY WARNING: A plugin tried to call itself 'Core'. Renaming it automatically.";
             m_moduleName = "invalid_plugin_name";
         } else {
             m_moduleName = moduleName;
@@ -101,13 +101,13 @@ ConfigManager::JsonResult ConfigManager::validateJsonString(const QString &json)
     QJsonDocument doc = QJsonDocument::fromJson(json.toUtf8(), &error);
 
     if (error.error != QJsonParseError::NoError) {
-        qCCritical(lcConfig) << "Ugyldig JSON-streng ved posisjon" 
+        qCCritical(lcConfig) << "Invalid JSON string at position" 
                              << error.offset << ":" << error.errorString();
         return {false, {}};
     }
 
     if (!doc.isObject()) {
-        qCCritical(lcConfig) << "Ugyldig JSON: Rot-elementet er ikke et objekt";
+        qCCritical(lcConfig) << "Invalid JSON: the root element is not an object";
         return {false, {}};
     }
 

@@ -26,7 +26,7 @@ public:
 } // namespace Plugins
 } // namespace KIOTShared
 
-#define KIOTPluginInterface_iid "org.kiot.PluginInterface/1.0" // Bruk gjerne en fast streng for testing, eller APP_ID hvis den er definert
+#define KIOTPluginInterface_iid "org.kiot.PluginInterface/1.0" // Feel free to use a fixed string for testing, or APP_ID if it is defined
 
-// Pakk klassenavnet inn i ekstra parenteser for å unngå at MOC feiltolker navnerommet
+// Wrap the class name in extra parentheses so that MOC does not misread the namespace
 Q_DECLARE_INTERFACE(KIOTShared::Plugins::KIOTPluginInterface, KIOTPluginInterface_iid)

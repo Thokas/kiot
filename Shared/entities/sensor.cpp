@@ -24,7 +24,7 @@ void Sensor::init()
 
     // Standard state topic
     setDiscoveryConfig("state_topic", baseTopic());
-    setDiscoveryConfig("json_attributes_topic", baseTopic() + "/attributes"); // ny topic for attributes
+    setDiscoveryConfig("json_attributes_topic", baseTopic() + "/attributes"); // new topic for attributes
 
     sendRegistration();
     publishState();

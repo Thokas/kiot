@@ -300,14 +300,14 @@ private:
 } // namespace KIOTShared
 
 #define KIOT_UNQUOTE(s) QString(s).remove(QLatin1Char('"'))
-// Enkel makro for å deklarere en kategori i en header (.h)
+// Simple macro to declare a category in a header (.h)
 #define DECLARE_LOGGER(Name) Q_DECLARE_LOGGING_CATEGORY(Name)
 
 // Macro for creating a log category matching project_name from cmakelists
 #define LOG_CAT(suffix) PROJECT_NAME "." #suffix
 
 #define LOG_PLUGINCAT(suffix) PROJECT_NAME ".Plugins." #suffix
-// Enkel makro for å definere kategorien i en .cpp-fil med automatisk prosjekt-prefix
+// Simple macro to define the category in a .cpp file with an automatic project prefix
 #define DEFINE_LOGGER(Name, SubCategory) \
         DECLARE_LOGGER(Name); \
         Q_LOGGING_CATEGORY(Name, LOG_CAT(SubCategory))

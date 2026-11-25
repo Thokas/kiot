@@ -87,7 +87,7 @@ PlatformHelper::Architecture PlatformHelper::currentArchitecture()
  */
 bool PlatformHelper::isFlatpak()
 {
-    // Sjekk standard Flatpak miljøvariabler
+    // Check the standard Flatpak environment variables
     static bool cached = false;
     static bool isFlatpakValue = false;
     
@@ -358,7 +358,7 @@ bool PlatformHelper::isWayland()
  */
 QString PlatformHelper::detectDesktopEnvironment()
 {
-    // 1. Hent den første non-empty env-variabelen etter prioritet
+    // 1. Get the first non-empty env variable by priority
     QString rawDesktop = qEnvironmentVariable("XDG_CURRENT_DESKTOP");
     if (rawDesktop.isEmpty()) {
         rawDesktop = qEnvironmentVariable("DESKTOP_SESSION");
@@ -373,19 +373,19 @@ QString PlatformHelper::detectDesktopEnvironment()
 
     QString lowerDesktop = rawDesktop.toLower();
 
-    // 2. Skille ut spesifikke miljøer basert på nøkkelord
+    // 2. Tell specific environments apart by keyword
 
     // KDE Plasma
     if (lowerDesktop.contains("kde") || lowerDesktop.contains("plasma")) {
         return "kde";
     }
 
-    // COSMIC (System76) - Må sjekkes FØR gnome/pop pga ny Rust-desktop
+    // COSMIC (System76) - Must be checked BEFORE gnome/pop because of the new Rust desktop
     if (lowerDesktop.contains("cosmic")) {
         return "cosmic";
     }
 
-    // GNOME og derivater (Ubuntu, Pop!_OS GTK-era, Budgie, Pantheon)
+    // GNOME and derivatives (Ubuntu, Pop!_OS GTK-era, Budgie, Pantheon)
     if (lowerDesktop.contains("gnome") || lowerDesktop.contains("ubuntu") || 
         lowerDesktop.contains("pop") || lowerDesktop.contains("pantheon") || 
         lowerDesktop.contains("budgie")) {
@@ -427,7 +427,7 @@ QString PlatformHelper::detectDesktopEnvironment()
         return "dde";
     }
 
-    // Hvis variablene inneholder kolon (f.eks. "X-FOO:BAR"), returner det første leddet
+    // If the variables contain a colon (e.g. "X-FOO:BAR"), return the first part
     if (lowerDesktop.contains(':')) {
         return lowerDesktop.split(':').first();
     }
@@ -448,7 +448,7 @@ QStringList PlatformHelper::makeHostContext(const QString &program, const QStrin
 {
     QStringList result;
     if (isFlatpak()) {
-        // Bruk flatpak-spawn for å kjøre kommandoer på vertssystemet
+        // Use flatpak-spawn to run commands on the host system
         result << "flatpak-spawn" << "--host" << program;
         result << arguments;
     } else {
@@ -501,18 +501,18 @@ bool PlatformHelper::checkFlatpakFeature(const QString &group, const QString &ke
     while (!in.atEnd()) {
         QString line = in.readLine().trimmed();
 
-        // Ignorer tomme linjer og kommentarer (standard for keyfile er # eller ;)
+        // Ignore empty lines and comments (the keyfile standard is # or ;)
         if (line.isEmpty() || line.startsWith('#') || line.startsWith(';'))
             continue;
 
-        // Sjekk etter seksjoner, f.eks. [Application]
+        // Look for sections, e.g. [Application]
         if (line.startsWith('[') && line.endsWith(']')) {
             currentGroup = line.mid(1, line.length() - 2);
             inTargetGroup = (currentGroup == group);
             continue;
         }
 
-        // Hvis vi er i riktig gruppe, let etter nøkkelen
+        // If we are in the right group, look for the key
         if (inTargetGroup) {
             int equalIndex = line.indexOf('=');
             if (equalIndex != -1) {
@@ -520,7 +520,7 @@ bool PlatformHelper::checkFlatpakFeature(const QString &group, const QString &ke
                 if (currentKey == key) {
                     QString rawValue = line.mid(equalIndex + 1).trimmed();
                     
-                    // Flatpak bruker semikolon som separator (og ofte en avsluttende ';' på slutten)
+                    // Flatpak uses a semicolon as separator (and often a trailing ';' at the end)
                     QStringList values = rawValue.split(';', Qt::SkipEmptyParts);
                     
                     qCDebug(helper) << "Flatpak feature check (manual):" << group << key << expectedValue << values;
@@ -550,11 +550,11 @@ bool PlatformHelper::checkFlatpakFeature(const QString &group, const QString &ke
         qCDebug(helper) << "Flat keys found:" << info.childKeys();
         return false;
     }
-    // Hent strengen fra seksjonen (f.eks. "Session Bus Policy/org.freedesktop.Flatpak")
+    // Get the string from the section (e.g. "Session Bus Policy/org.freedesktop.Flatpak")
     auto rawValue = info.value(key);
     qCDebug(helper) << "Flatpak feature check:" << group << key << expectedValue << rawValue;
     QString ll = rawValue.toString();
-    // Del opp på semikolon og kommategn hvis det er en liste
+    // Split on semicolons and commas if it is a list
     QStringList values = ll.split(";");
     qCDebug(helper) << "Flatpak feature check:" << group << key << expectedValue << values;
     return values.contains(expectedValue);

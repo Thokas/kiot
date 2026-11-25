@@ -17,7 +17,7 @@ public:
     explicit TransportManager(QObject *parent = nullptr);
     ~TransportManager() override;
     
-    // Sikker metode for at plugins/andre moddelar kan hente referanse til klienten
+    // Safe way for plugins/other modules to get a reference to the client
     static QMqttClient *mqttClient()
     {
         if(s_self && s_self->m_client)
