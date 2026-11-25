@@ -44,9 +44,11 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Config
     CoreAddons
+    I18n
 )
 add_library(KIOT_UIQT STATIC ${KIOT_UIQT_SOURCES})
 
+target_compile_definitions(KIOT_UIQT PRIVATE TRANSLATION_DOMAIN="kiot")
 target_link_libraries(KIOT_UIQT PRIVATE
     Qt6::Core
     Qt6::Widgets
@@ -56,6 +58,8 @@ target_link_libraries(KIOT_UIQT PRIVATE
     KIOTShared
     KF6::ConfigCore
     KF6::CoreAddons
+    KF6::I18n
+    KF6::I18nQml
 )
 qt_policy(SET QTP0004 NEW)
 qt_add_qml_module(KIOT_UIQT

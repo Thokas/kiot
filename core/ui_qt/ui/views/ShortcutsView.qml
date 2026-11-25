@@ -15,7 +15,7 @@ Flickable {
     // --- INTERNE DIALOGER ---
     QQC2.Dialog {
         id: newShortcutDialog
-        title: "Create New Shortcut"
+        title: i18n("Create New Shortcut")
         standardButtons: QQC2.Dialog.Ok | QQC2.Dialog.Cancel
         
         ColumnLayout {
@@ -27,17 +27,17 @@ Flickable {
                 columnSpacing: 10
                 rowSpacing: 10
                 
-                QQC2.Label { text: "Shortcut ID:" }
+                QQC2.Label { text: i18n("Shortcut ID:") }
                 QQC2.TextField {
                     id: newShortcutNameField
-                    placeholderText: "e.g., myShortcut, customAction"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "myShortcut, customAction")
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "Display Name:" }
+                QQC2.Label { text: i18n("Display Name:") }
                 QQC2.TextField {
                     id: newShortcutDisplayNameField
-                    placeholderText: "e.g., Do a thing, Custom Action"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "Do a thing, Custom Action")
                     Layout.fillWidth: true
                 }
             }
@@ -61,18 +61,18 @@ Flickable {
 
     QQC2.Dialog {
         id: deleteShortcutDialog
-        title: "Delete Shortcut"
+        title: i18n("Delete Shortcut")
         standardButtons: QQC2.Dialog.Yes | QQC2.Dialog.No
         property string shortcutId: ""
 
         ColumnLayout {
             QQC2.Label {
-                text: "Are you sure you want to delete this shortcut?"
+                text: i18n("Are you sure you want to delete this shortcut?")
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
             QQC2.Label {
-                text: deleteShortcutDialog.shortcutId ? "Shortcut: " + deleteShortcutDialog.shortcutId : ""
+                text: deleteShortcutDialog.shortcutId ? i18n("Shortcut: %1", deleteShortcutDialog.shortcutId) : ""
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
@@ -96,15 +96,15 @@ Flickable {
         spacing: 10
 
         QQC2.Label {
-            text: "Shortcuts"
+            text: i18n("Shortcuts")
             font.bold: true
             font.pixelSize: 16
             Layout.fillWidth: true
         }
 
         QQC2.Button {
-            text: "Create New Shortcut"
-            onClicked: newShortcutDialog.open() // Åpner den interne dialogen direkte!
+            text: i18n("Create New Shortcut")
+            onClicked: newShortcutDialog.open() // Opens the internal dialog directly!
             Layout.fillWidth: true
         }
 
@@ -137,7 +137,7 @@ Flickable {
                 }
                 
                 QQC2.Button {
-                    text: "Delete"
+                    text: i18n("Delete")
                     onClicked: {
                         deleteShortcutDialog.shortcutId = shortcutId
                         deleteShortcutDialog.open() // Setter ID og åpner den interne dialogen direkte!
@@ -151,7 +151,7 @@ Flickable {
                     rowSpacing: 10
                     Layout.fillWidth: true
                     
-                    QQC2.Label { text: "Name:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("Name:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: shortcutData["Name"] || ""
                         onEditingFinished: {

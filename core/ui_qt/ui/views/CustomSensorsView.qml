@@ -15,7 +15,7 @@ Flickable {
     // --- INTERN DIALOG: NYTT CUSTOM SENSOR ---
     QQC2.Dialog {
         id: newCustomSensorDialog
-        title: "Create New Custom Sensor"
+        title: i18n("Create New Custom Sensor")
         standardButtons: QQC2.Dialog.Ok | QQC2.Dialog.Cancel
         
         ColumnLayout {
@@ -27,53 +27,53 @@ Flickable {
                 columnSpacing: 10
                 rowSpacing: 10
                 
-                QQC2.Label { text: "Sensor ID:" }
+                QQC2.Label { text: i18n("Sensor ID:") }
                 QQC2.TextField {
                     id: newSensorIdField
-                    placeholderText: "e.g., gpu_power, custom_metric"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "gpu_power, custom_metric")
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "Display Name:" }
+                QQC2.Label { text: i18n("Display Name:") }
                 QQC2.TextField {
                     id: newSensorNameField
-                    placeholderText: "e.g., Gpu power draw"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "Gpu power draw")
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "Command:" }
+                QQC2.Label { text: i18n("Command:") }
                 QQC2.TextField {
                     id: newSensorCommandField
-                    placeholderText: "e.g., nvidia-smi ..."
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "nvidia-smi ...")
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "Interval:" }
+                QQC2.Label { text: i18n("Interval:") }
                 QQC2.TextField {
                     id: newSensorIntervalField
-                    placeholderText: "e.g., 60s, 10s"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "60s, 10s")
                     text: "60s"
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "Unit:" }
+                QQC2.Label { text: i18n("Unit:") }
                 QQC2.TextField {
                     id: newSensorUnitField
-                    placeholderText: "e.g., W, C, %, GiB"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "W, C, %, GiB")
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "Device Class:" }
+                QQC2.Label { text: i18n("Device Class:") }
                 QQC2.TextField {
                     id: newSensorDeviceClassField
-                    placeholderText: "e.g., power, temperature"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "power, temperature")
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "State Class:" }
+                QQC2.Label { text: i18n("State Class:") }
                 QQC2.TextField {
                     id: newSensorStateClassField
-                    placeholderText: "e.g., measurement"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "measurement")
                     text: "measurement"
                     Layout.fillWidth: true
                 }
@@ -120,19 +120,19 @@ Flickable {
     // --- INTERN DIALOG: SLETT CUSTOM SENSOR ---
     QQC2.Dialog {
         id: deleteCustomSensorDialog
-        title: "Delete Custom Sensor"
+        title: i18n("Delete Custom Sensor")
         standardButtons: QQC2.Dialog.Yes | QQC2.Dialog.No
         property string sensorId: ""
     
         ColumnLayout {
             QQC2.Label {
-                text: "Are you sure you want to delete this custom sensor?"
+                text: i18n("Are you sure you want to delete this custom sensor?")
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
         
             QQC2.Label {
-                text: deleteCustomSensorDialog.sensorId ? "Sensor: " + deleteCustomSensorDialog.sensorId : ""
+                text: deleteCustomSensorDialog.sensorId ? i18n("Sensor: %1", deleteCustomSensorDialog.sensorId) : ""
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
@@ -156,14 +156,14 @@ Flickable {
         spacing: 10
         
         QQC2.Label {
-            text: "Custom Sensors"
+            text: i18n("Custom Sensors")
             font.bold: true
             font.pixelSize: 16
             Layout.fillWidth: true
         }
         
         QQC2.Button {
-            text: "Create New Sensor"
+            text: i18n("Create New Sensor")
             onClicked: newCustomSensorDialog.open()
             Layout.fillWidth: true
         }
@@ -211,7 +211,7 @@ Flickable {
                 }
                 
                 QQC2.Button {
-                    text: "Delete"
+                    text: i18n("Delete")
                     onClicked: {
                         deleteCustomSensorDialog.sensorId = sensorId
                         deleteCustomSensorDialog.open()
@@ -225,7 +225,7 @@ Flickable {
                     rowSpacing: 10
                     Layout.fillWidth: true
                     
-                    QQC2.Label { text: "Name:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("Name:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: sensorData["name"] || ""
                         onEditingFinished: {
@@ -236,7 +236,7 @@ Flickable {
                         Layout.fillWidth: true
                     }
                     
-                    QQC2.Label { text: "Command:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("Command:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: sensorData["command"] || ""
                         onEditingFinished: {
@@ -247,7 +247,7 @@ Flickable {
                         Layout.fillWidth: true
                     }
                     
-                    QQC2.Label { text: "Interval:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("Interval:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: sensorData["interval"] || ""
                         onEditingFinished: {
@@ -258,7 +258,7 @@ Flickable {
                         Layout.fillWidth: true
                     }
                     
-                    QQC2.Label { text: "Unit:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("Unit:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: sensorData["unit_of_measurement"] || ""
                         onEditingFinished: {
@@ -269,7 +269,7 @@ Flickable {
                         Layout.fillWidth: true
                     }
                     
-                    QQC2.Label { text: "Device Class:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("Device Class:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: sensorData["device_class"] || ""
                         onEditingFinished: {
@@ -280,7 +280,7 @@ Flickable {
                         Layout.fillWidth: true
                     }
                     
-                    QQC2.Label { text: "State Class:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("State Class:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: sensorData["state_class"] || ""
                         onEditingFinished: {

@@ -55,6 +55,8 @@ kconfig_target_kcfg_file(kcm_kiot
 )
 
 
+# its own catalog, as KDE does it for a KCM: System Settings looks the QML strings up under the plugin id
+target_compile_definitions(kcm_kiot PRIVATE TRANSLATION_DOMAIN="kcm_kiot")
 target_link_libraries(kcm_kiot PRIVATE
     Qt6::Core
     Qt6::DBus

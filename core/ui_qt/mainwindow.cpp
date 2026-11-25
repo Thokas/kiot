@@ -1,5 +1,7 @@
 // SPDX-FileCopyrightText: 2025
 // SPDX-License-Identifier: LGPL-2.1-or-later
+#include <KLocalizedQmlContext>
+#include <KLocalizedString>
 #include "core/core.h"
 #include "mainwindow.h"
 #include "settingsmanager.h"
@@ -36,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     s_instance = this;
     
     
-    setWindowTitle( QString(PROJECT_NAME) + " Settings");
+    setWindowTitle(i18nc("@title:window %1 is the application name", "%1 Settings", QStringLiteral(PROJECT_NAME)));
     setWindowIcon(QIcon::fromTheme(PlatformHelper::generateServiceName()));
     setMinimumSize(800, 600);
     
@@ -94,6 +96,8 @@ void MainWindow::setupQml()
     // Create and add settings manager context property
   
     context->setContextProperty("settingsManager", m_settingsManager);
+    // i18n() in the QML, from the application's catalog
+    KLocalization::setupLocalizedContext(engine);
     
     // Load QML from resources
     m_quickWidget->setSource(QUrl("qrc:/imports/main_qt/window/ui/main.qml"));
@@ -119,7 +123,7 @@ void MainWindow::onMqttStateChanged(QMqttClient::ClientState state)
     const bool connected = (state == QMqttClient::Connected);
     updateIcon(state);
 
-    const QString statusText = connected ? "Connected" : "Disconnected";
+    const QString statusText = connected ? i18nc("@info:tooltip MQTT connection", "Connected") : i18nc("@info:tooltip MQTT connection", "Disconnected");
     m_trayIcon->setToolTip(QStringLiteral(PROJECT_NAME) + " " + statusText);
 }
 void MainWindow::onOpenSettings()
@@ -228,25 +232,25 @@ void MainWindow::setupSystemTray()
     if(m_trayIcon ==  nullptr)
         m_trayIcon = new QSystemTrayIcon(this);
     createIcons();
-    m_statusAction = m_menu->addAction("Status: Disconnected");
+    m_statusAction = m_menu->addAction(i18nc("@item:inmenu MQTT connection", "Status: Disconnected"));
     m_statusAction->setEnabled(false);
-    m_versionAction = m_menu->addAction("Version: " +  QStringLiteral(PROJECT_VERSION));
+    m_versionAction = m_menu->addAction(i18nc("@item:inmenu", "Version: %1", QStringLiteral(PROJECT_VERSION)));
     m_versionAction->setEnabled(false);
     m_menu->addSeparator();
-    QAction *settingsAction = m_menu->addAction(QIcon::fromTheme("configure"), "Open Settings");
+    QAction *settingsAction = m_menu->addAction(QIcon::fromTheme("configure"), i18nc("@action:inmenu", "Open Settings"));
     connect(settingsAction, &QAction::triggered, this, &MainWindow::onOpenSettings);
 
-    QAction *configAction = m_menu->addAction(QIcon::fromTheme("configure"), "Open Config file");
+    QAction *configAction = m_menu->addAction(QIcon::fromTheme("configure"), i18nc("@action:inmenu", "Open Config File"));
     connect(configAction, &QAction::triggered, this, &MainWindow::onOpenConfig);
 
-    QAction *reconnectAction = m_menu->addAction(QIcon::fromTheme("view-refresh"), "Reconnect");
+    QAction *reconnectAction = m_menu->addAction(QIcon::fromTheme("view-refresh"), i18nc("@action:inmenu MQTT connection", "Reconnect"));
     connect(reconnectAction, &QAction::triggered, this, &MainWindow::onReconnect);
     m_menu->addSeparator();
 
-    QAction *restartAction = m_menu->addAction(QIcon::fromTheme("system-reboot"), "Restart");
+    QAction *restartAction = m_menu->addAction(QIcon::fromTheme("system-reboot"), i18nc("@action:inmenu restart kiot", "Restart"));
     connect(restartAction, &QAction::triggered, this, &MainWindow::onRestart);
 
-    QAction *quitAction = m_menu->addAction(QIcon::fromTheme("application-exit"), "Quit");
+    QAction *quitAction = m_menu->addAction(QIcon::fromTheme("application-exit"), i18nc("@action:inmenu", "Quit"));
     connect(quitAction, &QAction::triggered, this, &MainWindow::onQuit);
 
     m_trayIcon->setContextMenu(m_menu);
@@ -309,21 +313,21 @@ void MainWindow::updateIcon(QMqttClient::ClientState state)
     if (state == QMqttClient::Connected) {
         m_trayIcon->setIcon(m_connectedIcon);
         if (m_statusAction) {
-            m_statusAction->setText("Status: Connected");
+            m_statusAction->setText(i18nc("@item:inmenu MQTT connection", "Status: Connected"));
         }
     } else if (state == QMqttClient::Connecting) {
         m_trayIcon->setIcon(m_connectingIcon);
         if (m_statusAction) {
-            m_statusAction->setText("Status: Connecting");
+            m_statusAction->setText(i18nc("@item:inmenu MQTT connection", "Status: Connecting"));
         }
     } else {
         m_trayIcon->setIcon(m_disconnectedIcon);
         if (m_statusAction) {
-            m_statusAction->setText("Status: Disconnected");
+            m_statusAction->setText(i18nc("@item:inmenu MQTT connection", "Status: Disconnected"));
         }
     }
     const bool connected = (state == QMqttClient::Connected);
-    const QString statusText = connected ? "Connected" : "Disconnected";
+    const QString statusText = connected ? i18nc("@info:tooltip MQTT connection", "Connected") : i18nc("@info:tooltip MQTT connection", "Disconnected");
     m_trayIcon->setToolTip(QStringLiteral(PROJECT_NAME) + " - " + statusText);
 }
 

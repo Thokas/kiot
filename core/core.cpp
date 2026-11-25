@@ -11,6 +11,7 @@
 #include <KIOTShared/kiotshared.h>
 
 #include <KConfigGroup>
+#include <KLocalizedString>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMqttClient>
@@ -81,7 +82,7 @@ bool HaControl::validateConfig()
     }else{
         KConfigGroup group(config, "general");
         if(group.readEntry("password") == "mqtt-password-here"){
-            MainWindow::sendNotification(QString(PROJECT_NAME),"Please configure your MQTT settings");
+            MainWindow::sendNotification(QString(PROJECT_NAME), i18nc("@info notification", "Please configure your MQTT settings"));
             m_mainWindow->show();
         }
 

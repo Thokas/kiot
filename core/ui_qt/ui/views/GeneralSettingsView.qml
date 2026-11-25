@@ -16,13 +16,13 @@ ColumnLayout {
         spacing: 4
 
         QQC2.Label {
-            text: "KDE Internet of Things"
+            text: i18n("KDE Internet of Things")
             font.bold: true
             font.pixelSize: 22
         }
 
         QQC2.Label {
-            text: "MQTT Connection"
+            text: i18n("MQTT Connection")
             font.bold: true
             font.pixelSize: 14
             opacity: 0.7 // Gir en fin dempet effekt på undertittelen
@@ -38,7 +38,7 @@ ColumnLayout {
         rowSpacing: 12
         Layout.fillWidth: true
 
-        QQC2.Label { text: "Hostname:"; Layout.alignment: Qt.AlignRight }
+        QQC2.Label { text: i18n("Hostname:"); Layout.alignment: Qt.AlignRight }
         QQC2.TextField {
             id: hostField
             Layout.fillWidth: true
@@ -46,7 +46,7 @@ ColumnLayout {
             onEditingFinished: if (root.settingsManager) root.settingsManager.setHost(text)
         }
 
-        QQC2.Label { text: "Port:"; Layout.alignment: Qt.AlignRight }
+        QQC2.Label { text: i18n("Port:"); Layout.alignment: Qt.AlignRight }
         QQC2.TextField {
             id: portField
             Layout.fillWidth: true
@@ -54,7 +54,7 @@ ColumnLayout {
             onEditingFinished: if (root.settingsManager) root.settingsManager.setPort(parseInt(text) || 1883)
         }
 
-        QQC2.Label { text: "Username:"; Layout.alignment: Qt.AlignRight }
+        QQC2.Label { text: i18n("Username:"); Layout.alignment: Qt.AlignRight }
         QQC2.TextField {
             id: userField
             Layout.fillWidth: true
@@ -62,7 +62,7 @@ ColumnLayout {
             onEditingFinished: if (root.settingsManager) root.settingsManager.setUser(text)
         }
 
-        QQC2.Label { text: "Password:"; Layout.alignment: Qt.AlignRight }
+        QQC2.Label { text: i18n("Password:"); Layout.alignment: Qt.AlignRight }
         QQC2.TextField {
             id: passwordField
             Layout.fillWidth: true
@@ -71,7 +71,7 @@ ColumnLayout {
             onEditingFinished: if (root.settingsManager) root.settingsManager.setPassword(text)
         }
 
-        QQC2.Label { text: "Discovery Prefix:"; Layout.alignment: Qt.AlignRight }
+        QQC2.Label { text: i18n("Discovery Prefix:"); Layout.alignment: Qt.AlignRight }
         QQC2.TextField {
             id: discoveryField
             Layout.fillWidth: true
@@ -79,21 +79,21 @@ ColumnLayout {
             onEditingFinished: if (root.settingsManager) root.settingsManager.setDiscoveryPrefix(text)
         }
 
-        QQC2.Label { text: "Use TLS:"; Layout.alignment: Qt.AlignRight }
+        QQC2.Label { text: i18n("Use TLS:"); Layout.alignment: Qt.AlignRight }
         QQC2.CheckBox {
             id: sslCheckbox
             checked: root.settingsManager ? root.settingsManager.getConfigValue("general", "tls", false) : false
             onToggled: if (root.settingsManager) root.settingsManager.saveConfigValue("general", "tls", checked)
         }
 
-        QQC2.Label { text: "Show system tray:"; Layout.alignment: Qt.AlignRight }
+        QQC2.Label { text: i18n("Show system tray:"); Layout.alignment: Qt.AlignRight }
         QQC2.CheckBox {
             id: systrayCheckbox
             checked: root.settingsManager ? root.settingsManager.getConfigValue("general", "systray", true) : true
             onToggled: if (root.settingsManager) root.settingsManager.saveConfigValue("general", "systray", checked)
         }
 
-        QQC2.Label { text: "Autostart:"; Layout.alignment: Qt.AlignRight }
+        QQC2.Label { text: i18n("Autostart:"); Layout.alignment: Qt.AlignRight }
         QQC2.CheckBox {
             id: autostartCheckbox
             checked: root.settingsManager ? root.settingsManager.getConfigValue("general", "autostart", false) : false
@@ -113,7 +113,7 @@ ColumnLayout {
         spacing: 16
 
         QQC2.Label {
-            text: '<a href="https://kde.org/community/donations">Donate to KDE</a>'
+            text: '<a href="https://kde.org/community/donations">' + i18n("Donate to KDE") + '</a>'
             onLinkActivated: (link) => Qt.openUrlExternally(link)
             
             MouseArea {
@@ -126,7 +126,7 @@ ColumnLayout {
         Item { Layout.fillWidth: true } 
 
         QQC2.Label {
-            text: '<a href="https://github.com/davidedmundson/kiot">GitHub Repository</a>'
+            text: '<a href="https://github.com/davidedmundson/kiot">' + i18n("GitHub Repository") + '</a>'
             onLinkActivated: (link) => Qt.openUrlExternally(link)
             
             MouseArea {
@@ -140,13 +140,13 @@ ColumnLayout {
         Layout.fillWidth: true
         spacing: 10
         QQC2.Button {
-            text: "Apply"
+            text: i18n("Apply")
             Layout.fillWidth: true
             onClicked: if (root.settingsManager) root.settingsManager.applySettings()
         }
 
         QQC2.Button {
-            text: "Defaults"
+            text: i18n("Defaults")
             Layout.fillWidth: true
             onClicked: if (root.settingsManager) root.settingsManager.restoreDefaults()
         }

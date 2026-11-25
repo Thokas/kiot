@@ -69,6 +69,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Config
     CoreAddons
     DBusAddons
+    I18n
 )
 
 # Core libraries used in final result
@@ -88,6 +89,7 @@ endif()
 message(STATUS "[CMake] Building Core bin for ${PROJECT_NAME}")
 add_executable(${PROJECT_NAME} ${KIOT_CORE_SOURCES})
 
+target_compile_definitions(${PROJECT_NAME} PRIVATE TRANSLATION_DOMAIN="kiot")
 target_link_libraries(${PROJECT_NAME} PRIVATE
     ${KIOT_PARTS}
     Qt6::Gui
@@ -96,6 +98,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt6::QuickWidgets
     KF6::CoreAddons
     KF6::DBusAddons
+    KF6::I18n
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE

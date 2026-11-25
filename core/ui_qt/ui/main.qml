@@ -30,15 +30,15 @@ QQC2.Page  {
                 QQC2.TabButton {
                     text: {
                         var section = modelData
-                        if (section === "general") return "General"
-                        if (section === "Integrations") return "Integrations"
-                        if (section === "Scripts") return "Scripts"
-                        if (section === "Shortcuts") return "Shortcuts"
-                        if (section === "CustomSensors") return "CustomSensors"
+                        if (section === "general") return i18n("General")
+                        if (section === "Integrations") return i18n("Integrations")
+                        if (section === "Scripts") return i18n("Scripts")
+                        if (section === "Shortcuts") return i18n("Shortcuts")
+                        if (section === "CustomSensors") return i18n("Custom Sensors")
                         if (section === "docker") return "Docker"
                         if (section === "heroic") return "Heroic Games"
                         if (section === "steam") return "Steam"
-                        if (section === "systemd") return "Systemd Services"
+                        if (section === "systemd") return i18n("Systemd Services")
                         return section.charAt(0).toUpperCase() + section.slice(1)
                     }
                 }
