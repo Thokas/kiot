@@ -25,7 +25,7 @@ function(kiot_add_test name)
     set_tests_properties(${name} PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen" TIMEOUT 120)
 endfunction()
 
-foreach(test platformhelpertest configmanagertest entitytest mqttentitiestest)
+foreach(test platformhelpertest configmanagertest entitytest passwordstoretest mqttentitiestest)
     kiot_add_test(${test} ${test}.cpp LINK_LIBRARIES KIOTShared Qt6::Mqtt Qt6::Network)
 endforeach()
 
