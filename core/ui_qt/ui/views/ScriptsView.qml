@@ -15,7 +15,7 @@ Flickable {
     // --- INTERN DIALOG: NYTT SKRIPT ---
     QQC2.Dialog {
         id: newScriptDialog
-        title: "Create New Script"
+        title: i18n("Create New Script")
         standardButtons: QQC2.Dialog.Ok | QQC2.Dialog.Cancel
         
         ColumnLayout {
@@ -27,31 +27,31 @@ Flickable {
                 columnSpacing: 10
                 rowSpacing: 10
                 
-                QQC2.Label { text: "Script ID:" }
+                QQC2.Label { text: i18n("Script ID:") }
                 QQC2.TextField {
                     id: newScriptNameField
-                    placeholderText: "e.g., browser, steam, custom"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "browser, steam, custom")
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "Display Name:" }
+                QQC2.Label { text: i18n("Display Name:") }
                 QQC2.TextField {
                     id: newScriptDisplayNameField
-                    placeholderText: "e.g., Launch Browser, Open Steam"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "Launch Browser, Open Steam")
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "Command:" }
+                QQC2.Label { text: i18n("Command:") }
                 QQC2.TextField {
                     id: newScriptCommandField
-                    placeholderText: "e.g., /usr/bin/brave, steam steam://..."
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "/usr/bin/brave, steam steam://...")
                     Layout.fillWidth: true
                 }
                 
-                QQC2.Label { text: "Icon:" }
+                QQC2.Label { text: i18n("Icon:") }
                 QQC2.TextField {
                     id: newScriptIconField
-                    placeholderText: "e.g., mdi:web, mdi:steam"
+                    placeholderText: i18nc("@info:placeholder %1 are examples", "e.g., %1", "mdi:web, mdi:steam")
                     text: "mdi:script-text"
                     Layout.fillWidth: true
                 }
@@ -86,19 +86,19 @@ Flickable {
     // --- INTERN DIALOG: SLETT SKRIPT ---
     QQC2.Dialog {
         id: deleteScriptDialog
-        title: "Delete Script"
+        title: i18n("Delete Script")
         standardButtons: QQC2.Dialog.Yes | QQC2.Dialog.No
         property string scriptId: ""
     
         ColumnLayout {
             QQC2.Label {
-                text: "Are you sure you want to delete this script?"
+                text: i18n("Are you sure you want to delete this script?")
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
         
             QQC2.Label {
-                text: deleteScriptDialog.scriptId ? "Script: " + deleteScriptDialog.scriptId : ""
+                text: deleteScriptDialog.scriptId ? i18n("Script: %1", deleteScriptDialog.scriptId) : ""
                 wrapMode: Text.WordWrap
                 Layout.fillWidth: true
             }
@@ -127,14 +127,14 @@ Flickable {
         spacing: 10
         
         QQC2.Label {
-            text: "Scripts"
+            text: i18n("Scripts")
             font.bold: true
             font.pixelSize: 16
             Layout.fillWidth: true
         }
         
         QQC2.Button {
-            text: "Create New Script"
+            text: i18n("Create New Script")
             onClicked: newScriptDialog.open()
             Layout.fillWidth: true
         }
@@ -185,7 +185,7 @@ Flickable {
                 }
                 
                 QQC2.Button {
-                    text: "Delete"
+                    text: i18n("Delete")
                     onClicked: {
                         deleteScriptDialog.scriptId = scriptId
                         deleteScriptDialog.open()
@@ -199,7 +199,7 @@ Flickable {
                     rowSpacing: 10
                     Layout.fillWidth: true
                     
-                    QQC2.Label { text: "Name:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("Name:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: scriptData["Name"] || ""
                         onEditingFinished: {
@@ -213,7 +213,7 @@ Flickable {
                         Layout.fillWidth: true
                     }
                     
-                    QQC2.Label { text: "Command:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("Command:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: scriptData["Exec"] || ""
                         onEditingFinished: {
@@ -227,7 +227,7 @@ Flickable {
                         Layout.fillWidth: true
                     }
                     
-                    QQC2.Label { text: "Icon:"; Layout.alignment: Qt.AlignRight }
+                    QQC2.Label { text: i18n("Icon:"); Layout.alignment: Qt.AlignRight }
                     QQC2.TextField {
                         text: scriptData["icon"] || ""
                         onEditingFinished: {

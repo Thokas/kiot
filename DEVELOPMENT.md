@@ -34,3 +34,15 @@ ctest --output-on-failure
 A test that pins a known bug uses `QEXPECT_FAIL`: it passes while the bug is there and fails once the bug is fixed, so remove the `QEXPECT_FAIL` together with the fix.
 
 The workflow `.github/workflows/tests.yml` builds everything and runs the tests on every push, on GitHub and on Forgejo alike; the Flatpak workflows run on GitHub only.
+
+# Translations
+
+Two gettext catalogs, set up with KI18n: `kiot` for the daemon (tray, settings window, notifications) and `kcm_kiot` for the System Settings module, which looks its strings up under its own plugin id. Wrap user-visible text in `i18n()`/`i18nc()`, in C++ and QML alike; leave log messages, config keys and Home Assistant entity names in English.
+
+Translations live in `po/<language>/<catalog>.po` and are compiled and installed with the build (`ki18n_install`). `Messages.sh` says which sources go into which catalog. After changing strings, update every language with:
+
+```sh
+scripts/update-translations.sh
+```
+
+and start a new language with its code, e.g. `scripts/update-translations.sh fr`. Both need gettext.

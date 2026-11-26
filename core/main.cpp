@@ -7,6 +7,7 @@
 
 #include <KAboutData>
 #include <KDBusService>
+#include <KLocalizedString>
 #include <KSignalHandler>
 
 DEFINE_LOGGER(main_cpp, Core.Main)
@@ -28,6 +29,8 @@ int main(int argc, char **argv)
     QString domain = PlatformHelper::resolveOrganizationDomain(QStringLiteral(PROJECT_DOMAIN));
     QApplication::setOrganizationDomain( domain);
     QApplication app(argc, argv);
+    // the catalog of the tray, the settings window and the notifications (po/<language>/kiot.po)
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("kiot"));
 
     initLogging();
     

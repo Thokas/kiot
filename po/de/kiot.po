@@ -1,0 +1,354 @@
+# German translations for kiot.
+# SPDX-FileCopyrightText: 2026 Thomas Kastenholz
+# SPDX-License-Identifier: LGPL-2.1-or-later
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kiot\n"
+"Report-Msgid-Bugs-To: https://github.com/davidedmundson/kiot/issues\n"
+"POT-Creation-Date: 2026-11-25 12:24+0000\n"
+"PO-Revision-Date: 2026-11-25 12:24+0000\n"
+"Last-Translator: Thomas Kastenholz\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/core.cpp:85
+#, kde-format
+msgctxt "@info notification"
+msgid "Please configure your MQTT settings"
+msgstr "Bitte richten Sie Ihre MQTT-Verbindung ein"
+
+#: core/ui_qt/mainwindow.cpp:41
+#, kde-format
+msgctxt "@title:window %1 is the application name"
+msgid "%1 Settings"
+msgstr "%1-Einstellungen"
+
+#: core/ui_qt/mainwindow.cpp:126 core/ui_qt/mainwindow.cpp:330
+#, kde-format
+msgctxt "@info:tooltip MQTT connection"
+msgid "Connected"
+msgstr "Verbunden"
+
+#: core/ui_qt/mainwindow.cpp:126 core/ui_qt/mainwindow.cpp:330
+#, kde-format
+msgctxt "@info:tooltip MQTT connection"
+msgid "Disconnected"
+msgstr "Nicht verbunden"
+
+#: core/ui_qt/mainwindow.cpp:235 core/ui_qt/mainwindow.cpp:326
+#, kde-format
+msgctxt "@item:inmenu MQTT connection"
+msgid "Status: Disconnected"
+msgstr "Status: Nicht verbunden"
+
+#: core/ui_qt/mainwindow.cpp:237
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Version: %1"
+msgstr "Version: %1"
+
+#: core/ui_qt/mainwindow.cpp:240
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Settings"
+msgstr "Einstellungen öffnen"
+
+#: core/ui_qt/mainwindow.cpp:243
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Open Config File"
+msgstr "Konfigurationsdatei öffnen"
+
+#: core/ui_qt/mainwindow.cpp:246
+#, kde-format
+msgctxt "@action:inmenu MQTT connection"
+msgid "Reconnect"
+msgstr "Neu verbinden"
+
+#: core/ui_qt/mainwindow.cpp:250
+#, kde-format
+msgctxt "@action:inmenu restart kiot"
+msgid "Restart"
+msgstr "Neu starten"
+
+#: core/ui_qt/mainwindow.cpp:253
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Quit"
+msgstr "Beenden"
+
+#: core/ui_qt/mainwindow.cpp:316
+#, kde-format
+msgctxt "@item:inmenu MQTT connection"
+msgid "Status: Connected"
+msgstr "Status: Verbunden"
+
+#: core/ui_qt/mainwindow.cpp:321
+#, kde-format
+msgctxt "@item:inmenu MQTT connection"
+msgid "Status: Connecting"
+msgstr "Status: Verbindung wird hergestellt"
+
+#: core/ui_qt/ui/main.qml:33
+#, kde-format
+msgid "General"
+msgstr "Allgemein"
+
+#: core/ui_qt/ui/main.qml:34
+#, kde-format
+msgid "Integrations"
+msgstr "Integrationen"
+
+#: core/ui_qt/ui/main.qml:35 core/ui_qt/ui/views/ScriptsView.qml:130
+#, kde-format
+msgid "Scripts"
+msgstr "Skripte"
+
+#: core/ui_qt/ui/main.qml:36 core/ui_qt/ui/views/ShortcutsView.qml:99
+#, kde-format
+msgid "Shortcuts"
+msgstr "Kurzbefehle"
+
+#: core/ui_qt/ui/main.qml:37 core/ui_qt/ui/views/CustomSensorsView.qml:159
+#, kde-format
+msgid "Custom Sensors"
+msgstr "Eigene Sensoren"
+
+#: core/ui_qt/ui/main.qml:41
+#, kde-format
+msgid "Systemd Services"
+msgstr "Systemd-Dienste"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:18
+#, kde-format
+msgid "Create New Custom Sensor"
+msgstr "Neuen eigenen Sensor erstellen"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:30
+#, kde-format
+msgid "Sensor ID:"
+msgstr "Sensor-ID:"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:33
+#: core/ui_qt/ui/views/CustomSensorsView.qml:40
+#: core/ui_qt/ui/views/CustomSensorsView.qml:47
+#: core/ui_qt/ui/views/CustomSensorsView.qml:54
+#: core/ui_qt/ui/views/CustomSensorsView.qml:62
+#: core/ui_qt/ui/views/CustomSensorsView.qml:69
+#: core/ui_qt/ui/views/CustomSensorsView.qml:76
+#: core/ui_qt/ui/views/ScriptsView.qml:33
+#: core/ui_qt/ui/views/ScriptsView.qml:40
+#: core/ui_qt/ui/views/ScriptsView.qml:47
+#: core/ui_qt/ui/views/ScriptsView.qml:54
+#: core/ui_qt/ui/views/ShortcutsView.qml:33
+#: core/ui_qt/ui/views/ShortcutsView.qml:40
+#, kde-format
+msgctxt "@info:placeholder %1 are examples"
+msgid "e.g., %1"
+msgstr "z. B. %1"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:37
+#: core/ui_qt/ui/views/ScriptsView.qml:37
+#: core/ui_qt/ui/views/ShortcutsView.qml:37
+#, kde-format
+msgid "Display Name:"
+msgstr "Anzeigename:"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:44
+#: core/ui_qt/ui/views/CustomSensorsView.qml:239
+#: core/ui_qt/ui/views/ScriptsView.qml:44
+#: core/ui_qt/ui/views/ScriptsView.qml:216
+#, kde-format
+msgid "Command:"
+msgstr "Befehl:"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:51
+#: core/ui_qt/ui/views/CustomSensorsView.qml:250
+#, kde-format
+msgid "Interval:"
+msgstr "Intervall:"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:59
+#: core/ui_qt/ui/views/CustomSensorsView.qml:261
+#, kde-format
+msgid "Unit:"
+msgstr "Einheit:"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:66
+#: core/ui_qt/ui/views/CustomSensorsView.qml:272
+#, kde-format
+msgid "Device Class:"
+msgstr "Geräteklasse:"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:73
+#: core/ui_qt/ui/views/CustomSensorsView.qml:283
+#, kde-format
+msgid "State Class:"
+msgstr "Zustandsklasse:"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:123
+#, kde-format
+msgid "Delete Custom Sensor"
+msgstr "Eigenen Sensor löschen"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:129
+#, kde-format
+msgid "Are you sure you want to delete this custom sensor?"
+msgstr "Möchten Sie diesen eigenen Sensor wirklich löschen?"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:135
+#, kde-format
+msgid "Sensor: %1"
+msgstr "Sensor: %1"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:166
+#, kde-format
+msgid "Create New Sensor"
+msgstr "Neuen Sensor erstellen"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:214
+#: core/ui_qt/ui/views/ScriptsView.qml:188
+#: core/ui_qt/ui/views/ShortcutsView.qml:140
+#, kde-format
+msgid "Delete"
+msgstr "Löschen"
+
+#: core/ui_qt/ui/views/CustomSensorsView.qml:228
+#: core/ui_qt/ui/views/ScriptsView.qml:202
+#: core/ui_qt/ui/views/ShortcutsView.qml:154
+#, kde-format
+msgid "Name:"
+msgstr "Name:"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:19
+#, kde-format
+msgid "KDE Internet of Things"
+msgstr "KDE Internet of Things"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:25
+#, kde-format
+msgid "MQTT Connection"
+msgstr "MQTT-Verbindung"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:41
+#, kde-format
+msgid "Hostname:"
+msgstr "Rechnername:"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:49
+#, kde-format
+msgid "Port:"
+msgstr "Port:"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:57
+#, kde-format
+msgid "Username:"
+msgstr "Benutzername:"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:65
+#, kde-format
+msgid "Password:"
+msgstr "Passwort:"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:74
+#, kde-format
+msgid "Discovery Prefix:"
+msgstr "Discovery-Präfix:"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:82
+#, kde-format
+msgid "Use TLS:"
+msgstr "TLS verwenden:"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:89
+#, kde-format
+msgid "Show system tray:"
+msgstr "Im Systemabschnitt anzeigen:"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:96
+#, kde-format
+msgid "Autostart:"
+msgstr "Autostart:"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:116
+#, kde-format
+msgid "Donate to KDE"
+msgstr "Für KDE spenden"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:129
+#, kde-format
+msgid "GitHub Repository"
+msgstr "GitHub-Repository"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:143
+#, kde-format
+msgid "Apply"
+msgstr "Anwenden"
+
+#: core/ui_qt/ui/views/GeneralSettingsView.qml:149
+#, kde-format
+msgid "Defaults"
+msgstr "Voreinstellungen"
+
+#: core/ui_qt/ui/views/ScriptsView.qml:18
+#: core/ui_qt/ui/views/ScriptsView.qml:137
+#, kde-format
+msgid "Create New Script"
+msgstr "Neues Skript erstellen"
+
+#: core/ui_qt/ui/views/ScriptsView.qml:30
+#, kde-format
+msgid "Script ID:"
+msgstr "Skript-ID:"
+
+#: core/ui_qt/ui/views/ScriptsView.qml:51
+#: core/ui_qt/ui/views/ScriptsView.qml:230
+#, kde-format
+msgid "Icon:"
+msgstr "Symbol:"
+
+#: core/ui_qt/ui/views/ScriptsView.qml:89
+#, kde-format
+msgid "Delete Script"
+msgstr "Skript löschen"
+
+#: core/ui_qt/ui/views/ScriptsView.qml:95
+#, kde-format
+msgid "Are you sure you want to delete this script?"
+msgstr "Möchten Sie dieses Skript wirklich löschen?"
+
+#: core/ui_qt/ui/views/ScriptsView.qml:101
+#, kde-format
+msgid "Script: %1"
+msgstr "Skript: %1"
+
+#: core/ui_qt/ui/views/ShortcutsView.qml:18
+#: core/ui_qt/ui/views/ShortcutsView.qml:106
+#, kde-format
+msgid "Create New Shortcut"
+msgstr "Neuen Kurzbefehl erstellen"
+
+#: core/ui_qt/ui/views/ShortcutsView.qml:30
+#, kde-format
+msgid "Shortcut ID:"
+msgstr "Kurzbefehl-ID:"
+
+#: core/ui_qt/ui/views/ShortcutsView.qml:64
+#, kde-format
+msgid "Delete Shortcut"
+msgstr "Kurzbefehl löschen"
+
+#: core/ui_qt/ui/views/ShortcutsView.qml:70
+#, kde-format
+msgid "Are you sure you want to delete this shortcut?"
+msgstr "Möchten Sie diesen Kurzbefehl wirklich löschen?"
+
+#: core/ui_qt/ui/views/ShortcutsView.qml:75
+#, kde-format
+msgid "Shortcut: %1"
+msgstr "Kurzbefehl: %1"

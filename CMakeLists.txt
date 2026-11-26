@@ -105,6 +105,11 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMQmlModule)
 include(ECMConfiguredInstall)
 
+# Translations: po/<language>/<catalog>.po, compiled and installed by ki18n_install() below. The catalogs
+# are kiot (the daemon: tray, settings window, notifications) and kcm_kiot (its System Settings module);
+# Messages.sh says which sources go into which, scripts/update-translations.sh updates them.
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS I18n)
+
 include_directories("${CMAKE_CURRENT_BINARY_DIR}")
 
 #Originale gives error with Experimental because sendspin-cpp uses its own rules here
@@ -168,6 +173,8 @@ endif()
 
 
 #feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+
+ki18n_install(po)
 
 
 include(CPack)
