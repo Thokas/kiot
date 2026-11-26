@@ -64,7 +64,7 @@ void Select::init()
 
     // Unsubscribe first to avoid shared subscriptions
 
-    // Opprett lokal subscription
+    // Create the local subscription
     auto subscription = TransportManager::mqttClient() ->subscribe(baseTopic() + "/set");
     if (subscription) {
         connect(subscription, &QMqttSubscription::messageReceived, this, [this](const QMqttMessage &message) {
@@ -74,11 +74,11 @@ void Select::init()
                 qCWarning(sel) << name() << "ignores" << newValue << "- not one of its options" << m_options;
                 return;
             }
-            // Oppdater lokalt
+            // Update locally
             m_state = newValue;
             publishState();
 
-            // Varsle integrasjonen
+            // Notify the integration
             emit optionSelected(m_state);
         });
     }

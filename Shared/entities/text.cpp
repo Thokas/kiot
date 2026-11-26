@@ -35,7 +35,7 @@ void Text::init()
             QString newText = QString::fromUtf8(message.payload());
             m_text = newText;
             emit stateChangeRequested(m_text);
-            setState(m_text); // oppdater MQTT state
+            setState(m_text); // update the MQTT state
         });
     }
 }

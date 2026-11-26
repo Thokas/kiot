@@ -111,7 +111,7 @@ HaControl::HaControl()
         // no host set: nothing to publish through until the user sets one up in the settings window
         qCWarning(core) << "MQTT is not configured, not loading the integrations";
         if (m_mainWindow) {
-            MainWindow::sendNotification(QString(PROJECT_NAME), "Please configure your MQTT settings");
+            MainWindow::sendNotification(QString(PROJECT_NAME), i18nc("@info notification", "Please configure your MQTT settings"));
             m_mainWindow->show();
         }
         return;
