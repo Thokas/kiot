@@ -35,13 +35,13 @@ QMap<QString, GameData>  SteamScanner::scanGames()
             QVariantMap vdfdata = VdfParser::parseFile(path);
             QVariantMap appState = vdfdata.value("appstate").toMap();
             if (appState.isEmpty()) {
-                qCWarning(steamlogger)  << "Ugyldig eller tom manifestfil!";
+                qCWarning(steamlogger)  << "Invalid or empty manifest file!";
                 continue;
             }
             QFileInfo fileInfo(path);
             QString basePath = fileInfo.absolutePath(); 
             QString gamePath = basePath + "/common/" + appState.value("installdir", "UNKNOWNDIRDUDE").toString();
-            QString GameName = appState.value("name", "Ukjent spill").toString();
+            QString GameName = appState.value("name", "Unknown game").toString();
 
             QDir dir(gamePath);
             if (!dir.exists()) {

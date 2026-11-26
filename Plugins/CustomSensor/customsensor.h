@@ -11,7 +11,7 @@
 using KIOTShared::Entities::Sensor;
 
 
-// Hjelpefunksjon for å parse tidsintervaller
+// Helper function to parse time intervals
 qint64 parseTimeSpanToMs(const QString &text);
 
 class CustomSensor : public QObject

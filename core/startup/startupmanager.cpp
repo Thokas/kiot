@@ -33,7 +33,7 @@ bool StartupManager::isAutostartEnabled() {
 }
 
 bool StartupManager::setAutostart(bool enabled) {
-    // 1. Prioriter Flatpak Background Portal hvis vi er i Flatpak og den er tilgjengelig
+    // 1. Prefer the Flatpak Background Portal if we are in Flatpak and it is available
     
     if (PlatformHelper::isFlatpak() && m_backgroundManager->isAvailable()) {
         qCDebug(sum) << "Running in Flatpak, delegating autostart configuration to BackgroundManager";
@@ -43,7 +43,7 @@ bool StartupManager::setAutostart(bool enabled) {
         qCWarning(sum) << "BackgroundManager autostart failed, attempting fallback";
     }
 
-    // 2. Prøv Systemd hvis tilgjengelig (og ikke i Flatpak)
+    // 2. Try Systemd if available (and not in Flatpak)
     if (!PlatformHelper::isFlatpak() && m_systemdManager->isAvailable()) {
         qCDebug(sum) << "Delegating autostart configuration to SystemdManager";
         if (m_systemdManager->setupAutostart(enabled)) {
@@ -52,7 +52,7 @@ bool StartupManager::setAutostart(bool enabled) {
         qCWarning(sum) << "Systemd autostart failed, attempting fallback to .desktop";
     }
 
-    // 3. Fallback til DesktopManager (.desktop-filer)
+    // 3. Fall back to DesktopManager (.desktop files)
     if (m_desktopManager->isAvailable()) {
         qCDebug(sum) << "Using DesktopManager for autostart";
         bool success = m_desktopManager->setupAutostart(enabled);
@@ -61,7 +61,7 @@ bool StartupManager::setAutostart(bool enabled) {
         }
     }
 
-    // Hvis absolutt alt feiler og vi prøver å enable
+    // If absolutely everything fails and we are trying to enable
     if (enabled) {
         qCCritical(sum) << "CRITICAL: Autostart could not be enabled in this environment!";
         qCCritical(sum) << "Step-by-step for manual configuration:";

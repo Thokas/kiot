@@ -88,7 +88,7 @@ void MediaPlayer::setState(const QVariantMap &info)
 
     if (changed) {
         emit stateChanged(m_state);
-        publishState(); // Hvis du har en publishState implementasjon
+        publishState(); // If you have a publishState implementation
     }
 }
 

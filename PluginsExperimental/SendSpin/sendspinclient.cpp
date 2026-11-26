@@ -28,7 +28,7 @@ public:
         QDir().mkpath(configDir);
         path_ = configDir + "/sendspin.json";
 
-        // Sørg for at filen eksisterer med standardverdier hvis den ikke finnes fra før
+        // Make sure the file exists with default values if it doesn't exist yet
         QFile file(path_);
         if (!file.exists() || file.size() == 0) {
             QJsonObject obj;
@@ -64,7 +64,7 @@ public:
     }
 
     std::optional<uint16_t> load_static_delay() override {
-        int val = readField("readField" == QString("static_delay_ms") ? "static_delay_ms" : "static_delay_ms"); // (liten skriveleif-sjekk fix under)
+        int val = readField("readField" == QString("static_delay_ms") ? "static_delay_ms" : "static_delay_ms"); // (small typo-check fix below)
         if (val < 0) return std::nullopt;
         return static_cast<uint16_t>(val);
     }

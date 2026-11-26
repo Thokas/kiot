@@ -7,7 +7,7 @@ cd "$SCRIPT_DIR/.."
 #Grabs the flatpak id dynamic from the manifest with fallback to david
 FLATPAK_ID=$(grep -E '^id:' .org.davidedmundson.kiot.yaml | awk '{print $2}' | tr -d '"' | tr -d "'")
 
-# Hvis den feiler, sett en trygg fallback
+# If it fails, set a safe fallback
 if [ -z "$FLATPAK_ID" ]; then
     FLATPAK_ID="org.davidedmundson.kiot"
 fi

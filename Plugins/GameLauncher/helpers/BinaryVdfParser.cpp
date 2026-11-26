@@ -26,7 +26,7 @@ QVariantMap BinaryVdfParser::parseMap(QDataStream &stream)
         quint8 type;
         stream >> type;
 
-        // 0x08 betyr at vi har nådd slutet av denne blokken
+        // 0x08 means we have reached the end of this block
         if (type == 0x08) {
             break;
         }
@@ -34,7 +34,7 @@ QVariantMap BinaryVdfParser::parseMap(QDataStream &stream)
         QString key = readNullTerminatedString(stream);
 
         switch (type) {
-        case 0x00: { // Sub-seksjon / Map
+        case 0x00: { // Subsection / Map
             result[key] = parseMap(stream);
             break;
         }
@@ -56,7 +56,7 @@ QVariantMap BinaryVdfParser::parseMap(QDataStream &stream)
             break;
         }
         default:
-            // Ukjent type, stans parsing av denne blokken for å unngå korrupsjon
+            // Unknown type, stop parsing this block to avoid corruption
             return result;
         }
     }
@@ -74,14 +74,14 @@ QVariantMap BinaryVdfParser::parseShortcutsFile(const QString &filePath)
     QDataStream stream(&file);
     stream.setByteOrder(QDataStream::LittleEndian);
 
-    // Første byte må være 0x00 (rot-blokk)
+    // The first byte must be 0x00 (root block)
     quint8 firstByte;
     stream >> firstByte;
     if (firstByte != 0x00) {
         return QVariantMap();
     }
 
-    // Les rot-navnet (som regel "shortcuts")
+    // Read the root name (usually "shortcuts")
     QString rootName = readNullTerminatedString(stream);
 
     QVariantMap rootMap;

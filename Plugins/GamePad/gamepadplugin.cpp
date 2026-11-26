@@ -45,7 +45,7 @@ bool GamepadPlugin::checkCompatibility()
         }
     }
     
-    // Sjekk om udev faktisk lar seg initialisere
+    // Check whether udev can actually be initialized
     struct udev *udev = udev_new();
     if (!udev) {
         qCWarning(plugin_logger) << "Failed to initialize udev context";

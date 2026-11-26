@@ -282,9 +282,9 @@ bool VirtualKeyboardDevice::typeString(const QString &text, int delayMs) {
 }
 
 /**
- * @brief Slå opp en keycode basert på navnet (f.eks. "KEY_A", "KEY_LEFTCTRL", "BTN_LEFT").
+ * @brief Look up a keycode by its name (e.g. "KEY_A", "KEY_LEFTCTRL", "BTN_LEFT").
  *
- * Støtter også at verdien allerede er et tall i tekstformat (f.eks. "29").
+ * Also accepts a value that is already a number in text form (e.g. "29").
  */
 int VirtualKeyboardDevice::keycodeFromName(const QString &name) const {
     bool isInt = false;
@@ -304,7 +304,7 @@ int VirtualKeyboardDevice::keycodeFromName(const QString &name) const {
 }
 
 /**
- * @brief Relativ musebevegelse (X, Y).
+ * @brief Relative mouse movement (X, Y).
  */
 bool VirtualKeyboardDevice::moveMouse(int relX, int relY) {
     if (m_fd < 0) return false;
@@ -317,8 +317,8 @@ bool VirtualKeyboardDevice::moveMouse(int relX, int relY) {
 }
 
 /**
- * @brief Bla med musehjulet.
- * @param steps Positive tall scroller opp, negative tall scroller ned.
+ * @brief Scroll with the mouse wheel.
+ * @param steps Positive numbers scroll up, negative numbers scroll down.
  */
 bool VirtualKeyboardDevice::scrollWheel(int steps) {
     if (m_fd < 0) return false;
@@ -420,7 +420,7 @@ int VirtualKeyboardDevice::stringToKeycode(QChar ch, bool &needsShift) const {
         return -1;
     }
 
-    // Hent den faktiske indeksen for Shift-modifikatoren i gjeldende layout
+    // Get the actual index of the Shift modifier in the current layout
     xkb_mod_index_t shiftIdx = xkb_keymap_mod_get_index(keymap, XKB_MOD_NAME_SHIFT);
     xkb_mod_mask_t shiftMask = (shiftIdx != XKB_MOD_INVALID) ? (1u << shiftIdx) : 0;
 
@@ -428,7 +428,7 @@ int VirtualKeyboardDevice::stringToKeycode(QChar ch, bool &needsShift) const {
 
     for (xkb_keycode_t xkb_code = 8; xkb_code < 255; ++xkb_code) {
 
-        // 1. Sjekk uten modifikatorer
+        // 1. Check without modifiers
         xkb_state_update_mask(state, 0, 0, 0, 0, 0, 0);
         uint32_t utf32_unstyled = xkb_state_key_get_utf32(state, xkb_code);
         if (utf32_unstyled == targetUtf32) {
@@ -437,7 +437,7 @@ int VirtualKeyboardDevice::stringToKeycode(QChar ch, bool &needsShift) const {
             break;
         }
 
-        // 2. Sjekk med Shift-modifikator aktivert
+        // 2. Check with the Shift modifier active
         if (shiftMask != 0) {
             xkb_state_update_mask(state, shiftMask, 0, 0, 0, 0, 0);
             uint32_t utf32_shifted = xkb_state_key_get_utf32(state, xkb_code);

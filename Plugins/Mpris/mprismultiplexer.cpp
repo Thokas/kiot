@@ -49,7 +49,7 @@ MprisMultiplexer::MprisMultiplexer(QObject *parent)
 
 MprisMultiplexer::~MprisMultiplexer()
 {
-    // Slett alle spillere eksplisitt nå så D-Bus grensesnittene lukkes pent
+    // Delete all players explicitly now so that the D-Bus interfaces close cleanly
     updateMediaPlayerEntity(nullptr);
     disconnect(m_playerEntity, nullptr, this, nullptr);
 }

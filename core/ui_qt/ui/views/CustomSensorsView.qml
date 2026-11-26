@@ -12,7 +12,7 @@ Flickable {
     property var settingsManager: null
     property string section: "CustomSensors"
 
-    // --- INTERN DIALOG: NYTT CUSTOM SENSOR ---
+    // --- INTERNAL DIALOG: NEW CUSTOM SENSOR ---
     QQC2.Dialog {
         id: newCustomSensorDialog
         title: i18n("Create New Custom Sensor")
@@ -117,7 +117,7 @@ Flickable {
         }
     }
 
-    // --- INTERN DIALOG: SLETT CUSTOM SENSOR ---
+    // --- INTERNAL DIALOG: DELETE CUSTOM SENSOR ---
     QQC2.Dialog {
         id: deleteCustomSensorDialog
         title: i18n("Delete Custom Sensor")
@@ -149,7 +149,7 @@ Flickable {
         }
     }
 
-    // --- HOVEDINNHOLD ---
+    // --- MAIN CONTENT ---
     ColumnLayout {
         id: contentColumn
         width: parent.width

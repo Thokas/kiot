@@ -90,7 +90,7 @@ bool PluginManager::stopPlugin(QString pluginName)
         return false;
     }
     
-    // Hent ut verdien direkte
+    // Get the value directly
     LoadedPluginA plugin = m_loadedPlugins.value(pluginName);
     
     if (plugin.interface) {
@@ -100,7 +100,7 @@ bool PluginManager::stopPlugin(QString pluginName)
         plugin.loader->unload();
     }
     
-    // Fjern direkte fra hashen ved hjelp av nøkkelen
+    // Remove directly from the hash by its key
     m_loadedPlugins.remove(pluginName);
     qCInfo(pm_logger) << "Stopped plugin" << pluginName;
     return true;

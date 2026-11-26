@@ -99,7 +99,7 @@ bool DesktopManager::removeDesktopFile() {
     return true;
 }
 
-// Sett opp autostart for .desktop (ingen D-Bus kreves her)
+// Set up autostart via .desktop (no D-Bus needed here)
 bool DesktopManager::setupAutostart(bool enabled) {
     qCDebug(dm) << "Setting .desktop autostart to:" << enabled;
 
@@ -120,17 +120,17 @@ bool DesktopManager::setupAutostart(bool enabled) {
     }
 }
 
-// Sjekker om filen eksisterer og om Exec-linjen matcher nåværende binærsti
+// Checks that the file exists and that the Exec line matches the current binary path
 bool DesktopManager::isAutostartEnabled()
 {
-    // 1. Sjekk at desktop-filen eksisterer
+    // 1. Check that the desktop file exists
     QFile file(desktopFilePath());
     if (!file.exists()) {
         qCDebug(dm) << "Desktop file missing:" << desktopFilePath();
         return false;
     }
 
-    // 2. Sjekk at Exec matcher nåværende sti
+    // 2. Check that Exec matches the current path
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QString content = QString::fromUtf8(file.readAll());
         file.close();
@@ -156,6 +156,6 @@ bool DesktopManager::isAutostartEnabled()
         return false;
     }
 
-    // Alt OK
+    // All OK
     return true;
 }

@@ -50,7 +50,7 @@ bool AccentColourWatcherPlugin::checkCompatibility()
             if (!hasAccess) {
                 qCWarning(plugin_logger_accentcolour) << "Missing required Flatpak permission to access 'kdeglobals'.";
                 qCInfo(plugin_logger_accentcolour) << "To fix this, you can grant read access using Flatseal or by running:";
-                qCInfo(plugin_logger_accentcolour) << "  flatpak --user override --filesystem=xdg-config/kdeglobals:ro " + PlatformHelper::generateServiceName(); // (eller tilsvarende app-id)
+                qCInfo(plugin_logger_accentcolour) << "  flatpak --user override --filesystem=xdg-config/kdeglobals:ro " + PlatformHelper::generateServiceName(); // (or the matching app id)
                 return false;
             }
         }

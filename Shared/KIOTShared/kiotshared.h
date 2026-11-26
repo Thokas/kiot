@@ -5,7 +5,7 @@
 
 #include "KIOTShared/kiotshared_export.h"
 
-// Hjelpere og Transport
+// Helpers and Transport
 #include "platformhelper.h"
 #include "dbusproperty.h"
 #include "Transport/transportmanager.h"

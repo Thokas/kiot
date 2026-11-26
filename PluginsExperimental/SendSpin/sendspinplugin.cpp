@@ -77,7 +77,7 @@ bool SendSpinPlugin::startPlugin()
     QString url = group.readEntry("url", "ws://homeassistant.local:8927/sendspin");
     m_sendspinClient = new SendspinDesktopClient("KIOT " + QHostInfo::localHostName().toLower());
     //TODO make url part of config file
-    m_sendspinClient->connectToServer(url); // Evt. send med en URL hvis du har det
+    m_sendspinClient->connectToServer(url); // Or pass a URL along if you have one
     qCInfo(tplogger) << name() << "plugin started successfully";
     return true;
 }

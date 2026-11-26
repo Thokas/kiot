@@ -141,14 +141,14 @@ void MacroPlugin::notificationCallback(QByteArray message) {
         return;
     }
 
-    // --- VALIDERING FØR KJØRING ---
+    // --- VALIDATION BEFORE RUNNING ---
     QString errorMsg;
     if (!validateSequence(body, errorMsg)) {
-        qCWarning(plugin_logger) << "Makro-validator failed:" << errorMsg << "| Macro:" << body;
-        return; // Avbryt slik at vi ikke sender noe tull til uinput!
+        qCWarning(plugin_logger) << "Macro validator failed:" << errorMsg << "| Macro:" << body;
+        return; // Abort so that we don't send any garbage to uinput!
     }
 
-    // Hvis alt er OK, kjørsekvensen
+    // If all is OK, run the sequence
     executeSequence(body);
 }
 

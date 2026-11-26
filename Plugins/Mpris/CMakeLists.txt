@@ -8,7 +8,7 @@ message(STATUS "[CMake] Plugin: ${PROJECT_NAME}")
 
 set(DBUS_XML_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dbus")
 
-# Samler kildene akkurat som i din fungerende integrasjonskode
+# Collects the sources just like in your working integration code
 set(MPRIS_SRCS
     mprisplugin.cpp
     mprisplugin.h

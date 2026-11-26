@@ -43,9 +43,9 @@ bool ActivePlugin::checkCompatibility()
     }
 
     if (PlatformHelper::isFlatpak()) {
-        auto appId = PlatformHelper::generateServiceName(); // Henter app-ID-en din (f.eks. org.kde.kiot)
+        auto appId = PlatformHelper::generateServiceName(); // Gets your app ID (e.g. org.kde.kiot)
 
-        // 1. Sjekk ScreenSaver-tilgang
+        // 1. Check ScreenSaver access
         bool hasAccessScreen = PlatformHelper::checkFlatpakFeature("Session Bus Policy", "org.freedesktop.ScreenSaver", "talk");
         if (!hasAccessScreen) {
             qCWarning(plugin_logger) << "Missing required Flatpak permission for ScreenSaver D-Bus interface.";
@@ -54,7 +54,7 @@ bool ActivePlugin::checkCompatibility()
             return false;
         }
 
-        // 2. Sjekk Inhibit-tilgang (hvis dere krever den)
+        // 2. Check Inhibit access (if you require it)
         bool hasAccessInhibit = PlatformHelper::checkFlatpakFeature("Session Bus Policy", "org.freedesktop.Inhibit", "talk");
         if (!hasAccessInhibit) {
             qCWarning(plugin_logger) << "Missing required Flatpak permission for Inhibit D-Bus interface.";
@@ -82,7 +82,7 @@ bool ActivePlugin::startPlugin()
     sensor->setName("Active");
     sensor->setDiscoveryConfig("device_class", "presence");
 
-    // Idle-logikk fra din originale kode
+    // Idle logic from your original code
     auto kidletime = KIdleTime::instance();
     auto id = kidletime->addIdleTimeout(60 * 1000);
     

@@ -39,7 +39,7 @@ void SettingsManager::saveConfigValue(const QString &section, const QString &key
     KSharedConfigPtr config = KSharedConfig::openConfig(PlatformHelper::configFilePath(), KConfig::SimpleConfig );
     KConfigGroup group(config, section);
     
-    // Lagre basert på type
+    // Save based on type
     if (value.typeId() == QMetaType::Bool) {
         group.writeEntry(key, value.toBool());
     } else if (value.typeId() == QMetaType::Int) {
@@ -49,7 +49,7 @@ void SettingsManager::saveConfigValue(const QString &section, const QString &key
     }
     config->sync();
 
-    // Oppdater cache
+    // Update the cache
     QVariantMap sectionMap = m_configSections[section].toMap();
     sectionMap[key] = value;
     m_configSections[section] = sectionMap;
@@ -57,7 +57,7 @@ void SettingsManager::saveConfigValue(const QString &section, const QString &key
 }
 void SettingsManager::saveNestedConfigValue(const QString &mainSection, const QString &subSection, const QString &key, const QVariant &value)
 {
-    // 1. Skriv direkte til disk via KConfig (uten å slette grupper)
+    // 1. Write directly to disk via KConfig (without deleting groups)
     KSharedConfigPtr config = KSharedConfig::openConfig(PlatformHelper::configFilePath(), KConfig::SimpleConfig );
     KConfigGroup parentGroup(config.data(), mainSection);
  
@@ -72,7 +72,7 @@ void SettingsManager::saveNestedConfigValue(const QString &mainSection, const QS
     }
     config->sync();
 
-    // 2. Oppdater cachen i tråd med hvordan groupNestedSections bygger den ("Scripts" -> "launch_chrome" -> key)
+    // 2. Update the cache in line with how groupNestedSections builds it ("Scripts" -> "launch_chrome" -> key)
     QVariantMap mainMap = m_configSections[mainSection].toMap();
     QVariantMap subMap = mainMap[subSection].toMap();
     
@@ -101,18 +101,18 @@ void SettingsManager::deleteNestedConfig(const QString &mainSection, const QStri
 {
     KSharedConfigPtr config = KSharedConfig::openConfig(PlatformHelper::configFilePath(), KConfig::SimpleConfig );
     
-    // 1. Åpne foreldregruppen først
+    // 1. Open the parent group first
     KConfigGroup parentGroup(config.data(), mainSection);
     parentGroup.deleteGroup(subSection);
     
     config->sync();
 
-    // 3. Fjern fra lokal cache og oppdater QML
+    // 3. Remove from the local cache and update QML
     QString fullSection = mainSection + "/" + subSection;
     if (m_configSections.contains(fullSection)) {
         m_configSections.remove(fullSection);
     } else {
-        // Fallback hvis cachen er lagret på et annet nivå
+        // Fallback if the cache is stored at another level
         QVariantMap mainMap = m_configSections[mainSection].toMap();
         if (mainMap.contains(subSection)) {
             mainMap.remove(subSection);
@@ -120,7 +120,7 @@ void SettingsManager::deleteNestedConfig(const QString &mainSection, const QStri
         }
     }
     
-    // Kjører groupNestedSections på nytt for å rydde opp i kartet og rekkefølgen
+    // Runs groupNestedSections again to tidy up the map and the order
     groupNestedSections();
     emit configSectionsChanged();
 }
@@ -246,13 +246,13 @@ void SettingsManager::loadConfigFile()
 
     KSharedConfigPtr config = KSharedConfig::openConfig(PlatformHelper::configFilePath(), KConfig::SimpleConfig );
     
-    // Hent alle hovedgrupper i konfigurasjonsfilen
+    // Get all top-level groups in the config file
     QStringList groupNames = config->groupList();
 
     for (const QString &groupName : groupNames) {
         KConfigGroup group(config, groupName);
         
-        // Sjekk om gruppen har undergrupper (f.eks. [Scripts][launch_chrome])
+        // Check whether the group has subgroups (e.g. [Scripts][launch_chrome])
         QStringList subGroups = group.groupList();
         if (!subGroups.isEmpty() && (groupName == "Scripts" || groupName == "Shortcuts"|| groupName == "CustomSensors")) {
             for (const QString &subName : subGroups) {
@@ -263,7 +263,7 @@ void SettingsManager::loadConfigFile()
                 QStringList keys = subGroup.keyList();
                 for (const QString &key : keys) {
                     QString valStr = subGroup.readEntry(key, QString());
-                    // Enkel typekonvertering
+                    // Simple type conversion
                     if (valStr.compare("true", Qt::CaseInsensitive) == 0) {
                         subData[key] = true;
                     } else if (valStr.compare("false", Qt::CaseInsensitive) == 0) {
@@ -286,7 +286,7 @@ void SettingsManager::loadConfigFile()
                 }
             }
         } else {
-            // Standard gruppe uten undergrupper (f.eks. [Main])
+            // Standard group without subgroups (e.g. [Main])
             QVariantMap sectionData;
             QStringList keys = group.keyList();
             for (const QString &key : keys) {
@@ -314,13 +314,13 @@ void SettingsManager::loadConfigFile()
         }
     }
 
-    // Sørg for at "general" alltid kommer først
+    // Make sure "general" always comes first
     if (m_sectionOrder.contains("general")) {
         m_sectionOrder.removeAll("general");
         m_sectionOrder.prepend("general");
     }
 
-    // Kjører groupNestedSections for å rydde opp i QML-strukturen
+    // Runs groupNestedSections to tidy up the QML structure
     groupNestedSections();
 
     emit configSectionsChanged();
@@ -329,7 +329,7 @@ void SettingsManager::loadConfigFile()
 
 void SettingsManager::loadFromQSettings()
 {
-    // Beholdes for bakkompatibilitet eller videresendes til loadConfigFile
+    // Kept for backward compatibility, or forwarded to loadConfigFile
     loadConfigFile();
 }
 

@@ -30,16 +30,16 @@
 using KIOTShared::PlatformHelper;
 
 struct GameData {
-    QString launcher;     // "Steam", "Heroic", "Lutris", osv.
-    QString gameId;       // AppID eller intern ID
-    QString gameName;     // f.eks. "Skyrim Special Edition"
+    QString launcher;     // "Steam", "Heroic", "Lutris", etc.
+    QString gameId;       // AppID or internal ID
+    QString gameName;     // e.g. "Skyrim Special Edition"
     QString displayName;
-    QString runner;       // f.eks. "Proton GE-Proton9-2", "lutris-f wine"
+    QString runner;       // e.g. "Proton GE-Proton9-2", "lutris-f wine"
     
-    QString installPath;  // Hvor spillets filer ligger (.exe)
-    QString prefixPath;   // Eks: ~/.local/share/steam/steamapps/compatdata/489830/pfx
-    QString exePath;      // Hoved-exe fil for spillet
-    QString iconPath;    // Sti til ikonet
+    QString installPath;  // Where the game's files are (.exe)
+    QString prefixPath;   // E.g. ~/.local/share/steam/steamapps/compatdata/489830/pfx
+    QString exePath;      // Main exe file of the game
+    QString iconPath;    // Path to the icon
     QString envVariables;
     QString launchOptions;
 };
@@ -52,12 +52,12 @@ public:
     explicit GameBase(QObject *parent = nullptr) : QObject(parent) {}
     virtual ~GameBase() = default;
 
-    // === Pure Virtuals / Vurderes overstyrt av subklasser ===
+    // === Pure Virtuals / May be overridden by subclasses ===
     virtual QString launcherName() const = 0;
     virtual bool isLauncherInstalled() const = 0;
     virtual QMap<QString, GameData> scanGames() = 0;
 
-    // Felles funksjon for å hente cachede spill
+    // Shared function to get the cached games
     QMap<QString, GameData> getGameList() const { return m_games; }
 
 
@@ -66,5 +66,5 @@ Q_SIGNALS:
 
 protected:
     QMap<QString, GameData> m_games;
-    QFileSystemWatcher m_watcher; // Klonet til hver underklasse for å lytte på relevante konfigurasjonsfiler
+    QFileSystemWatcher m_watcher; // Cloned into each subclass to watch the relevant config files
 };

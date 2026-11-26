@@ -10,7 +10,7 @@ DEFINE_LOGGER(transportlogger, Shared.TransportManager)
 namespace KIOTShared {
 namespace Transport {
 
-// Statiske variabler
+// Static variables
 static bool s_transportManagerInstantiated = false;
 TransportManager *TransportManager::s_self = nullptr;
 

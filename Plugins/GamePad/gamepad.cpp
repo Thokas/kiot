@@ -9,7 +9,7 @@ Gamepad::Gamepad(QObject *parent)
     m_sensor = new BinarySensor(this);
     m_sensor->setId("gamepad_connected");
     m_sensor->setName("Gamepad Connected");
-    // Sett opp udev
+    // Set up udev
     m_udev = udev_new();
     if (!m_udev) {
         qCWarning(gamepad) << "Failed to create udev context";
@@ -71,7 +71,7 @@ void Gamepad::updateState()
         if (dev) {
             const char *name = udev_device_get_sysname(dev);
             
-            // Vi sjekker om det er en joystick-enhet
+            // We check whether it is a joystick device
             if (name && strstr(name, "js") != nullptr) {
                 connected = true;
                 devName = QString::fromUtf8(name);
@@ -84,7 +84,7 @@ void Gamepad::updateState()
 
                 if (parent) {
                     const char *vendor = udev_device_get_sysattr_value(parent, "idVendor");
-                    const char *model = udev_device_get_sysattr_value(parent, "idProduct"); // Eller "product" for tekst
+                    const char *model = udev_device_get_sysattr_value(parent, "idProduct"); // Or "product" for text
                     const char *model_db = udev_device_get_property_value(parent, "ID_MODEL_FROM_DATABASE");
                     const char *product_name = udev_device_get_sysattr_value(parent, "product");
                     const char *vendor_name = udev_device_get_sysattr_value(parent, "manufacturer");
@@ -93,12 +93,12 @@ void Gamepad::updateState()
                     dev_productName = product_name ? QString::fromUtf8(product_name) : "Unknown";
                     dev_VendorName = vendor_name ? QString::fromUtf8(vendor_name) : "Unknown";
                     devVendor = vendor ? QString::fromUtf8(vendor) : "Unknown";
-                    // Prioriter DB-navn hvis det finnes, ellers bruk Hex-ID
+                    // Prefer the DB name if there is one, otherwise use the hex ID
                     devModel = model_db ? QString::fromUtf8(model_db) : (model ? QString::fromUtf8(model) : "Unknown");
                 }
                 
                 udev_device_unref(dev);
-                break; // Vi fant en, stopper her for nå
+                break; // We found one, stopping here for now
             }
             udev_device_unref(dev);
         }

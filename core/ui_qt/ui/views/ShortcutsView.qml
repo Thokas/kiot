@@ -12,7 +12,7 @@ Flickable {
     property var settingsManager: null
     property string section: "Shortcuts"
 
-    // --- INTERNE DIALOGER ---
+    // --- INTERNAL DIALOGS ---
     QQC2.Dialog {
         id: newShortcutDialog
         title: i18n("Create New Shortcut")
@@ -89,7 +89,7 @@ Flickable {
         }
     }
 
-    // --- HOVEDINNHOLD ---
+    // --- MAIN CONTENT ---
     ColumnLayout {
         id: contentColumn
         width: parent.width
@@ -140,7 +140,7 @@ Flickable {
                     text: i18n("Delete")
                     onClicked: {
                         deleteShortcutDialog.shortcutId = shortcutId
-                        deleteShortcutDialog.open() // Setter ID og åpner den interne dialogen direkte!
+                        deleteShortcutDialog.open() // Sets the ID and opens the internal dialog directly!
                     }
                     Layout.alignment: Qt.AlignRight
                 }
