@@ -49,16 +49,16 @@ bool TransportManager::initiateMqttClient()
     auto config = KSharedConfig::openConfig(PlatformHelper::configFilePath(), KConfig::SimpleConfig);
     if(!config->hasGroup("general"))
     {
-        qCFatal(transportlogger) << "No MQTT config found";
+        qCWarning(transportlogger) << "No MQTT config found";
         Q_EMIT mqttConfigMissing();
         return false;
     }
     auto group = config->group("general");
 
+    // Written by the first run for "not configured yet": PasswordStore treats it as no password, and
+    // the settings window is open for the user to set one (HaControl::validateConfig)
     if(group.readEntry("password") == "mqtt-password-here"){
-        qCFatal(transportlogger) << "Default MQTT password detected";
-        Q_EMIT mqttConfigMissing();
-        return false;
+        qCWarning(transportlogger) << "MQTT password not configured yet";
     }
     
     m_client = new QMqttClient(this);
@@ -113,6 +113,9 @@ void TransportManager::handleStateChanged(QMqttClient::ClientState state) {
 
 void TransportManager::doConnect()
 {
+    if (!m_client) {
+        return;
+    }
     if (!m_passwordRead) {
         m_connectRequested = true;
         return;
@@ -135,6 +138,9 @@ void TransportManager::doConnect()
 
 void TransportManager::doDisconnect()
 {
+    if (!m_client) {
+        return;
+    }
     qCInfo(transportlogger) << "Disconnecting from MQTT broker";
     if(reconnectTimer->isActive())
         reconnectTimer->stop();
