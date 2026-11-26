@@ -328,9 +328,7 @@ private Q_SLOTS:
         QTRY_VERIFY(!messagesOn(base, beforeCommands).isEmpty() && messagesOn(base, beforeCommands).last() == "a");
 
         // Home Assistant rejects a state that is not one of the options ("Invalid option for ...")
-        QEXPECT_FAIL("", "Select passes on and publishes any command payload, not only its options", Continue);
         QCOMPARE(selected.count(), 2);
-        QEXPECT_FAIL("", "Select passes on and publishes any command payload, not only its options", Continue);
         QVERIFY(!messagesOn(base, beforeCommands).contains("not-an-option"));
     }
 
@@ -357,8 +355,12 @@ private Q_SLOTS:
         QSignalSpy requested(&number, &Number::valueChangeRequested);
         send(base + QStringLiteral("/set"), "abc");
         send(base + QStringLiteral("/set"), "42");
-        QTRY_COMPARE(requested.count(), 1);
-        QCOMPARE(requested.first().at(0).toInt(), 42);
+        send(base + QStringLiteral("/set"), "151");
+        send(base + QStringLiteral("/set"), "-1");
+        send(base + QStringLiteral("/set"), "150");
+        QTRY_COMPARE(requested.count(), 2);
+        QCOMPARE(requested.at(0).at(0).toInt(), 42);
+        QCOMPARE(requested.at(1).at(0).toInt(), 150);
     }
 
     void testButtonTextAndLock()
@@ -581,8 +583,7 @@ private Q_SLOTS:
 
     void testRuntimeRegistrationTwice()
     {
-        // Audio re-registers its output volume each time ~/.config/plasmaparc changes, Bluetooth a
-        // device's switch each time it comes back
+        // Audio re-registers its output volume each time ~/.config/plasmaparc changes
         const QString base = baseTopic(QStringLiteral("test_twice"));
         Switch sw;
         sw.setId(QStringLiteral("test_twice"));
@@ -595,7 +596,30 @@ private Q_SLOTS:
         send(base + QStringLiteral("/set"), "true");
         send(base + QStringLiteral("/set"), "false");
         QTRY_VERIFY(!requested.isEmpty() && requested.last().at(0).toBool() == false);
-        QEXPECT_FAIL("", "init() connects the command handler again to the subscription QtMqtt hands back", Continue);
+        QCOMPARE(requested.count(), 2);
+    }
+
+    void testRuntimeRegistrationNewRange()
+    {
+        // what Audio does when the raised maximum volume is switched on or off
+        const QString base = baseTopic(QStringLiteral("test_range"));
+        Number number;
+        number.setId(QStringLiteral("test_range"));
+        number.setName(QStringLiteral("Range"));
+        number.setRange(0, 100);
+        number.runtimeRegistration();
+        QVERIFY(waitSubscribed(base + QStringLiteral("/set")));
+
+        const qsizetype since = mark();
+        number.setRange(0, 150);
+        number.runtimeRegistration();
+        const QJsonObject config = waitForJson(discoveryTopic(QStringLiteral("number"), QStringLiteral("test_range")), since);
+        QCOMPARE(config.value(QStringLiteral("max")).toVariant().toInt(), 150);
+
+        QSignalSpy requested(&number, &Number::valueChangeRequested);
+        send(base + QStringLiteral("/set"), "120");
+        send(base + QStringLiteral("/set"), "30");
+        QTRY_VERIFY(!requested.isEmpty() && requested.last().at(0).toInt() == 30);
         QCOMPARE(requested.count(), 2);
     }
 
